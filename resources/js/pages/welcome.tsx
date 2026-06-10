@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Head, Link, usePage } from '@inertiajs/react';
-import { dashboard, login } from '@/routes';
+import { client, dashboard, login } from '@/routes';
 import { register } from '@/routes';
 
 const faqs = [
@@ -52,6 +52,9 @@ export default function Welcome() {
                             <a href="#beranda" className="text-sm text-gray-600 hover:text-blue-700 transition-colors font-medium">Beranda</a>
                             <a href="#tentang" className="text-sm text-gray-600 hover:text-blue-700 transition-colors font-medium">Tentang Kami</a>
                             <a href="#layanan" className="text-sm text-gray-600 hover:text-blue-700 transition-colors font-medium">Layanan</a>
+                            <Link href={client()} className="text-sm text-gray-600 hover:text-blue-700 transition-colors font-medium">
+                                Partner
+                            </Link >
                         </div>
 
                         <div className="flex items-center gap-3">
