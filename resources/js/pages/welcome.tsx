@@ -3,30 +3,16 @@ import { Head } from '@inertiajs/react';
 import CompanyNavbar from '@/components/company-navbar';
 import CompanyFooter from '@/components/company-footer';
 
-const faqs = [
-    {
-        q: 'Apa saja area layanan CV. Muara Karya?',
-        a: 'Kami melayani seluruh wilayah Indonesia, dengan fokus utama di area Jabodetabek dan kota-kota besar lainnya. Tim kami siap hadir ke lokasi proyek Anda sesuai kebutuhan.',
-    },
-    {
-        q: 'Apakah CV. Muara Karya menangani proyek komersial berskala besar?',
-        a: 'Ya, kami berpengalaman menangani proyek dari skala rumah tinggal hingga gedung perkantoran, mall, hotel, dan fasilitas industri. Lebih dari 500 proyek residensial dan komersial telah kami selesaikan sejak 2014.',
-    },
-    {
-        q: 'Berapa lama proses instalasi sistem HVAC?',
-        a: 'Durasi instalasi bergantung pada skala dan kompleksitas sistem. Untuk hunian standar umumnya 1–3 hari, sedangkan proyek komersial besar dapat memakan waktu beberapa minggu. Kami selalu memberikan estimasi waktu yang akurat sebelum proyek dimulai.',
-    },
-    {
-        q: 'Apakah tersedia layanan perbaikan darurat 24 jam?',
-        a: 'Ya, tim Reactive Maintenance kami siaga 24/7 untuk merespons kerusakan darurat. Kami memahami bahwa gangguan sistem HVAC dapat berdampak langsung pada operasional bisnis Anda.',
-    },
-    {
-        q: 'Bagaimana cara mendapatkan estimasi biaya proyek?',
-        a: 'Anda dapat menghubungi kami melalui email atau telepon untuk konsultasi awal. Tim teknis kami akan melakukan survei lokasi secara gratis dan menyiapkan proposal anggaran yang transparan sesuai kebutuhan Anda.',
-    },
-];
+interface Faq { id: number; question: string; answer: string; }
+interface Service { id: number; title: string; description: string; items: string[]; color: string; }
 
-export default function Welcome() {
+const colorStyles: Record<string, { card: string; icon: string; iconBg: string; check: string }> = {
+    blue:  { card: 'hover:border-blue-200',  icon: 'text-blue-700',  iconBg: 'bg-blue-100 group-hover:bg-blue-200',  check: 'text-blue-500' },
+    cyan:  { card: 'hover:border-cyan-200',  icon: 'text-cyan-700',  iconBg: 'bg-cyan-100 group-hover:bg-cyan-200',  check: 'text-cyan-500' },
+    green: { card: 'hover:border-green-200', icon: 'text-green-700', iconBg: 'bg-green-100 group-hover:bg-green-200', check: 'text-green-500' },
+};
+
+export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; services: Service[] }) {
     const [openFaq, setOpenFaq] = useState<number | null>(null);
 
     return (
@@ -232,87 +218,34 @@ export default function Welcome() {
                         </div>
 
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {/* Residential & Commercial */}
-                            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 hover:shadow-md hover:border-blue-200 transition-all group">
-                                <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-200 transition-colors">
-                                    <svg className="w-7 h-7 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                    </svg>
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-3">Residential & Commercial</h3>
-                                <p className="text-gray-500 mb-5 leading-relaxed text-sm">
-                                    Layanan lengkap HVAC untuk hunian dan gedung komersial, dari skala kecil hingga proyek besar.
-                                </p>
-                                <ul className="space-y-2.5">
-                                    {[
-                                        'Instalasi AC & sistem pendingin',
-                                        'Pengadaan unit & komponen HVAC',
-                                        'Perbaikan & troubleshooting sistem',
-                                    ].map((item) => (
-                                        <li key={item} className="flex items-center gap-2.5 text-sm text-gray-600">
-                                            <svg className="w-4 h-4 text-blue-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                            {services.map((service, idx) => {
+                                const c = colorStyles[service.color] ?? colorStyles.blue;
+                                return (
+                                    <div
+                                        key={service.id}
+                                        className={`bg-white rounded-2xl p-8 shadow-sm border border-slate-200 hover:shadow-md transition-all group ${c.card} ${idx === 2 && services.length === 3 ? 'md:col-span-2 lg:col-span-1' : ''}`}
+                                    >
+                                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors ${c.iconBg}`}>
+                                            <svg className={`w-7 h-7 ${c.icon}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                             </svg>
-                                            {item}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            {/* Specialized Services */}
-                            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 hover:shadow-md hover:border-cyan-200 transition-all group">
-                                <div className="w-14 h-14 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-cyan-200 transition-colors">
-                                    <svg className="w-7 h-7 text-cyan-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                                    </svg>
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-3">Specialized Services</h3>
-                                <p className="text-gray-500 mb-5 leading-relaxed text-sm">
-                                    Layanan khusus untuk sistem ventilasi dan distribusi udara yang membutuhkan keahlian teknis tinggi.
-                                </p>
-                                <ul className="space-y-2.5">
-                                    {[
-                                        'Instalasi & fabrikasi ducting',
-                                        'Sistem HVAC industrial & komersial',
-                                        'Air ventilation & sirkulasi udara',
-                                    ].map((item) => (
-                                        <li key={item} className="flex items-center gap-2.5 text-sm text-gray-600">
-                                            <svg className="w-4 h-4 text-cyan-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                                            </svg>
-                                            {item}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            {/* Preventive & Reactive Maintenance */}
-                            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 hover:shadow-md hover:border-green-200 transition-all group md:col-span-2 lg:col-span-1">
-                                <div className="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-200 transition-colors">
-                                    <svg className="w-7 h-7 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-3">Preventive & Reactive Maintenance</h3>
-                                <p className="text-gray-500 mb-5 leading-relaxed text-sm">
-                                    Program pemeliharaan terstruktur untuk menjaga performa optimal sistem HVAC dan meminimalkan downtime.
-                                </p>
-                                <ul className="space-y-2.5">
-                                    {[
-                                        'Jadwal perawatan berkala (PM)',
-                                        'Respons cepat kerusakan darurat',
-                                        'Laporan kondisi & rekomendasi teknis',
-                                    ].map((item) => (
-                                        <li key={item} className="flex items-center gap-2.5 text-sm text-gray-600">
-                                            <svg className="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                                            </svg>
-                                            {item}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                                        </div>
+                                        <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                                        <p className="text-gray-500 mb-5 leading-relaxed text-sm">{service.description}</p>
+                                        <ul className="space-y-2.5">
+                                            {service.items.map((item) => (
+                                                <li key={item} className="flex items-center gap-2.5 text-sm text-gray-600">
+                                                    <svg className={`w-4 h-4 flex-shrink-0 ${c.check}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    {item}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 </section>
@@ -404,7 +337,7 @@ export default function Welcome() {
                                                 className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left"
                                             >
                                                 <span className={`font-medium text-sm leading-snug ${openFaq === i ? 'text-blue-700' : 'text-gray-800'}`}>
-                                                    {item.q}
+                                                    {item.question}
                                                 </span>
                                                 <span className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-colors ${
                                                     openFaq === i ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-500'
@@ -416,7 +349,7 @@ export default function Welcome() {
                                             </button>
                                             {openFaq === i && (
                                                 <div className="px-5 pb-5">
-                                                    <p className="text-gray-600 text-sm leading-relaxed">{item.a}</p>
+                                                    <p className="text-gray-600 text-sm leading-relaxed">{item.answer}</p>
                                                 </div>
                                             )}
                                         </div>
