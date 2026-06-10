@@ -2,10 +2,7 @@ import { Link, usePage } from '@inertiajs/react';
 import { dashboard, login, register } from '@/routes';
 
 const sectionLinks = [
-    { href: '/#beranda', label: 'Beranda' },
-    { href: '/#tentang', label: 'Tentang Kami' },
-    { href: '/#layanan', label: 'Layanan' },
-    { href: '/#faq', label: 'FAQ' },
+    { href: '/', label: 'Beranda' }
 ];
 
 const pageLinks = [
@@ -14,10 +11,8 @@ const pageLinks = [
 ];
 
 export default function CompanyNavbar() {
-    const { auth, ziggy } = usePage().props as any;
-    const currentPath = typeof ziggy?.location === 'string'
-        ? new URL(ziggy.location).pathname
-        : '/';
+    const { auth } = usePage().props as any;
+    const currentPath = usePage().url.split('?')[0];
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm border-b border-slate-100">
@@ -37,7 +32,11 @@ export default function CompanyNavbar() {
                         <a
                             key={link.href}
                             href={link.href}
-                            className="text-sm text-gray-600 hover:text-blue-700 transition-colors font-medium"
+                            className={`text-sm font-medium transition-colors ${
+                                currentPath === link.href
+                                    ? 'text-blue-700'
+                                    : 'text-gray-600 hover:text-blue-700'
+                            }`}
                         >
                             {link.label}
                         </a>
