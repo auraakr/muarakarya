@@ -6,7 +6,7 @@ const sectionLinks = [
 ];
 
 const pageLinks = [
-    { href: '/client', label: 'Partner' },
+    { href: '/client', label: 'Mitra' },
     { href: '/karir', label: 'Karir' },
 ];
 
