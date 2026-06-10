@@ -1,9 +1,34 @@
+import { useState } from 'react';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { dashboard, login } from '@/routes';
 import { register } from '@/routes';
 
+const faqs = [
+    {
+        q: 'Apa saja area layanan CV. Muara Karya?',
+        a: 'Kami melayani seluruh wilayah Indonesia, dengan fokus utama di area Jabodetabek dan kota-kota besar lainnya. Tim kami siap hadir ke lokasi proyek Anda sesuai kebutuhan.',
+    },
+    {
+        q: 'Apakah CV. Muara Karya menangani proyek komersial berskala besar?',
+        a: 'Ya, kami berpengalaman menangani proyek dari skala rumah tinggal hingga gedung perkantoran, mall, hotel, dan fasilitas industri. Lebih dari 500 proyek residensial dan komersial telah kami selesaikan sejak 2014.',
+    },
+    {
+        q: 'Berapa lama proses instalasi sistem HVAC?',
+        a: 'Durasi instalasi bergantung pada skala dan kompleksitas sistem. Untuk hunian standar umumnya 1–3 hari, sedangkan proyek komersial besar dapat memakan waktu beberapa minggu. Kami selalu memberikan estimasi waktu yang akurat sebelum proyek dimulai.',
+    },
+    {
+        q: 'Apakah tersedia layanan perbaikan darurat 24 jam?',
+        a: 'Ya, tim Reactive Maintenance kami siaga 24/7 untuk merespons kerusakan darurat. Kami memahami bahwa gangguan sistem HVAC dapat berdampak langsung pada operasional bisnis Anda.',
+    },
+    {
+        q: 'Bagaimana cara mendapatkan estimasi biaya proyek?',
+        a: 'Anda dapat menghubungi kami melalui email atau telepon untuk konsultasi awal. Tim teknis kami akan melakukan survei lokasi secara gratis dan menyiapkan proposal anggaran yang transparan sesuai kebutuhan Anda.',
+    },
+];
+
 export default function Welcome() {
     const { auth } = usePage().props;
+    const [openFaq, setOpenFaq] = useState<number | null>(null);
 
     return (
         <>
@@ -334,6 +359,117 @@ export default function Welcome() {
                                     ))}
                                 </ul>
                             </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* ── FAQ ── */}
+                <section id="faq" className="py-24 bg-white">
+                    <div className="max-w-7xl mx-auto px-4 lg:px-8">
+                        <div className="grid lg:grid-cols-2 rounded-3xl overflow-hidden shadow-xl border border-slate-200">
+
+                            {/* Left — person image panel */}
+                            <div className="relative bg-gradient-to-br from-blue-900 via-slate-800 to-slate-900 min-h-[520px] flex flex-col justify-end overflow-hidden">
+                                {/* Decorative blobs */}
+                                <div className="absolute top-0 left-0 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+                                <div className="absolute bottom-0 right-0 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3" />
+
+                                {/* Dot grid */}
+                                <div className="absolute inset-0"
+                                    style={{
+                                        backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)',
+                                        backgroundSize: '28px 28px',
+                                    }}
+                                />
+
+                                {/* Person silhouette */}
+                                <div className="relative flex justify-center items-end flex-1 pt-12 px-8">
+                                    <svg viewBox="0 0 260 340" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-52 lg:w-64 drop-shadow-2xl">
+                                        {/* Hard hat */}
+                                        <ellipse cx="130" cy="72" rx="52" ry="14" fill="#1d4ed8" opacity="0.9"/>
+                                        <path d="M80 72 Q78 50 130 44 Q182 50 180 72Z" fill="#1d4ed8" opacity="0.9"/>
+                                        {/* Head */}
+                                        <ellipse cx="130" cy="88" rx="30" ry="34" fill="#fbbf24" opacity="0.85"/>
+                                        {/* Face details */}
+                                        <ellipse cx="120" cy="85" rx="4" ry="5" fill="#92400e" opacity="0.5"/>
+                                        <ellipse cx="140" cy="85" rx="4" ry="5" fill="#92400e" opacity="0.5"/>
+                                        <path d="M118 100 Q130 110 142 100" stroke="#92400e" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.5"/>
+                                        {/* Vest / Body */}
+                                        <path d="M95 120 L75 240 L185 240 L165 120 Q148 112 130 110 Q112 112 95 120Z" fill="#1e40af" opacity="0.9"/>
+                                        {/* High-vis stripes */}
+                                        <rect x="78" y="170" width="104" height="12" rx="2" fill="#fbbf24" opacity="0.75"/>
+                                        <rect x="78" y="195" width="104" height="12" rx="2" fill="#fbbf24" opacity="0.75"/>
+                                        {/* Left arm */}
+                                        <path d="M95 125 L58 210 L74 218 L108 138Z" fill="#1e3a8a" opacity="0.9"/>
+                                        {/* Right arm */}
+                                        <path d="M165 125 L202 210 L186 218 L152 138Z" fill="#1e3a8a" opacity="0.9"/>
+                                        {/* Wrench in hand */}
+                                        <rect x="188" y="205" width="8" height="28" rx="4" fill="#94a3b8" opacity="0.9" transform="rotate(-20 192 219)"/>
+                                        <ellipse cx="191" cy="207" rx="7" ry="5" fill="#64748b" opacity="0.9" transform="rotate(-20 191 207)"/>
+                                        {/* Pants */}
+                                        <path d="M75 240 L85 320 L125 320 L130 270 L135 320 L175 320 L185 240Z" fill="#1e293b" opacity="0.95"/>
+                                        {/* Boots */}
+                                        <rect x="82" y="312" width="46" height="18" rx="6" fill="#0f172a" opacity="1"/>
+                                        <rect x="132" y="312" width="46" height="18" rx="6" fill="#0f172a" opacity="1"/>
+                                    </svg>
+                                </div>
+
+                                {/* Bottom overlay card */}
+                                <div className="relative bg-white/10 backdrop-blur-sm border-t border-white/10 px-8 py-6">
+                                    <p className="text-white font-semibold text-lg leading-snug">
+                                        Ada pertanyaan tentang proyek Anda?
+                                    </p>
+                                    <p className="text-slate-300 text-sm mt-1">
+                                        Tim kami siap membantu — konsultasi awal gratis.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Right — FAQ accordion */}
+                            <div className="bg-white px-8 py-12 lg:px-12 lg:py-14 flex flex-col justify-center">
+                                <span className="inline-block bg-blue-50 text-blue-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4 self-start">
+                                    FAQ
+                                </span>
+                                <h2 className="text-3xl font-bold text-gray-900 mb-2 leading-tight">
+                                    Pertanyaan yang Sering Diajukan
+                                </h2>
+                                <p className="text-gray-500 text-sm mb-8">
+                                    Temukan jawaban atas pertanyaan umum seputar layanan kami.
+                                </p>
+
+                                <div className="space-y-3">
+                                    {faqs.map((item, i) => (
+                                        <div
+                                            key={i}
+                                            className={`border rounded-xl overflow-hidden transition-colors ${
+                                                openFaq === i ? 'border-blue-200 bg-blue-50/50' : 'border-slate-200 bg-white'
+                                            }`}
+                                        >
+                                            <button
+                                                onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                                                className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left"
+                                            >
+                                                <span className={`font-medium text-sm leading-snug ${openFaq === i ? 'text-blue-700' : 'text-gray-800'}`}>
+                                                    {item.q}
+                                                </span>
+                                                <span className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-colors ${
+                                                    openFaq === i ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-500'
+                                                }`}>
+                                                    <svg className={`w-3.5 h-3.5 transition-transform ${openFaq === i ? 'rotate-45' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
+                                                    </svg>
+                                                </span>
+                                            </button>
+                                            {openFaq === i && (
+                                                <div className="px-5 pb-5">
+                                                    <p className="text-gray-600 text-sm leading-relaxed">{item.a}</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </section>
