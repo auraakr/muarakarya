@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Head } from '@inertiajs/react';
 import CompanyNavbar from '@/components/company-navbar';
+import CompanyFooter from '@/components/company-footer';
 
 type Department = 'Semua' | 'Engineering' | 'Sales' | 'Admin';
 
@@ -412,20 +413,7 @@ export default function Careers() {
                     </div>
                 </section>
 
-                {/* ── Footer ── */}
-                <footer className="bg-slate-900 py-8">
-                    <div className="max-w-7xl mx-auto px-4 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
-                        <div className="flex items-center gap-3">
-                            <div className="w-7 h-7 bg-blue-600 rounded-lg flex items-center justify-center">
-                                <span className="text-white font-bold text-xs">MK</span>
-                            </div>
-                            <span className="text-white font-semibold text-sm">CV. Muara Karya</span>
-                        </div>
-                        <p className="text-slate-500 text-sm text-center">
-                            &copy; {new Date().getFullYear()} CV. Muara Karya. Kontraktor HVAC & Refrigerasi sejak 2014.
-                        </p>
-                    </div>
-                </footer>
+                <CompanyFooter />
             </div>
         </>
     );
