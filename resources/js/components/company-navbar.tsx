@@ -55,32 +55,6 @@ export default function CompanyNavbar() {
                         </Link>
                     ))}
                 </div>
-
-                <div className="flex items-center gap-3">
-                    {auth.user ? (
-                        <Link
-                            href={dashboard()}
-                            className="text-sm bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors font-medium"
-                        >
-                            Dashboard
-                        </Link>
-                    ) : (
-                        <>
-                            <Link
-                                href={login()}
-                                className="text-sm text-gray-600 hover:text-blue-700 transition-colors font-medium hidden sm:inline"
-                            >
-                                Masuk
-                            </Link>
-                            <Link
-                                href={register()}
-                                className="text-sm bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors font-medium"
-                            >
-                                Daftar
-                            </Link>
-                        </>
-                    )}
-                </div>
             </nav>
         </header>
     );
