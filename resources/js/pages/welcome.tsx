@@ -27,7 +27,6 @@ const faqs = [
 ];
 
 export default function Welcome() {
-    const { auth } = usePage().props;
     const [openFaq, setOpenFaq] = useState<number | null>(null);
 
     return (
