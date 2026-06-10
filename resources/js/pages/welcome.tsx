@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Head, Link, usePage } from '@inertiajs/react';
-import { client, dashboard, login } from '@/routes';
-import { register } from '@/routes';
+import { Head } from '@inertiajs/react';
+import CompanyNavbar from '@/components/company-navbar';
 
 const faqs = [
     {
@@ -27,7 +26,6 @@ const faqs = [
 ];
 
 export default function Welcome() {
-    const { auth } = usePage<any>().props;
     const [openFaq, setOpenFaq] = useState<number | null>(null);
 
     return (
@@ -35,55 +33,7 @@ export default function Welcome() {
             <Head title="CV. Muara Karya — Kontraktor HVAC & Refrigerasi" />
             <div className="min-h-screen bg-white text-gray-800 scroll-smooth">
 
-                {/* ── Navbar ── */}
-                <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm border-b border-slate-100">
-                    <nav className="max-w-7xl mx-auto px-4 lg:px-8 h-16 flex items-center justify-between">
-                        <a href="#beranda" className="flex items-center gap-3">
-                            <div className="w-9 h-9 bg-blue-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <span className="text-white font-bold text-xs">MK</span>
-                            </div>
-                            <div className="leading-tight">
-                                <div className="font-bold text-gray-900 text-sm">CV. Muara Karya</div>
-                                <div className="text-xs text-blue-600">HVAC & Refrigerasi</div>
-                            </div>
-                        </a>
-
-                        <div className="hidden md:flex items-center gap-8">
-                            <a href="#beranda" className="text-sm text-gray-600 hover:text-blue-700 transition-colors font-medium">Beranda</a>
-                            <a href="#tentang" className="text-sm text-gray-600 hover:text-blue-700 transition-colors font-medium">Tentang Kami</a>
-                            <a href="#layanan" className="text-sm text-gray-600 hover:text-blue-700 transition-colors font-medium">Layanan</a>
-                            <Link href={client()} className="text-sm text-gray-600 hover:text-blue-700 transition-colors font-medium">
-                                Partner
-                            </Link >
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                            {auth.user ? (
-                                <Link
-                                    href={dashboard()}
-                                    className="text-sm bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors font-medium"
-                                >
-                                    Dashboard
-                                </Link>
-                            ) : (
-                                <>
-                                    <Link
-                                        href={login()}
-                                        className="text-sm text-gray-600 hover:text-blue-700 transition-colors font-medium hidden sm:inline"
-                                    >
-                                        Masuk
-                                    </Link>
-                                    <Link
-                                        href={register()}
-                                        className="text-sm bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors font-medium"
-                                    >
-                                        Daftar
-                                    </Link>
-                                </>
-                            )}
-                        </div>
-                    </nav>
-                </header>
+                <CompanyNavbar />
 
                 {/* ── Hero / Beranda ── */}
                 <section
