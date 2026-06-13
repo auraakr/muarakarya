@@ -49,8 +49,10 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                             </h1>
 
                             <p className="text-lg text-slate-300 mb-10 leading-relaxed max-w-2xl">
-                                CV. Muara Karya adalah kontraktor HVAC & Refrigerasi berpengalaman yang melayani kebutuhan
-                                instalasi, pengadaan, dan perawatan sistem pendingin untuk hunian dan komersial di seluruh Indonesia.
+                                CV. Muara Karya bergerak di bidang Jasa Mecanical dan Electrical, khususnya untuk bidang
+                                mesin Pendingin dan Tata Udara. Berdiri sejak tahun 2014 dan telah memiliki pengalaman
+                                10 tahun di bidangnya, siap memenuhi kebutuhan pangsa pasar dan permintaan para customer
+                                pengguna Mesin Pendingin dan Tata Udara.
                             </p>
 
                             <div className="flex flex-wrap gap-4 mb-16">
@@ -73,8 +75,8 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                                 {[
                                     { value: '500+', label: 'Proyek Selesai', sub: 'Residential & Commercial' },
                                     { value: '10+', label: 'Tahun Pengalaman', sub: 'Sejak 2014' },
-                                    { value: '100%', label: 'Komitmen HSSE', sub: 'Safety First' },
-                                    { value: '24/7', label: 'Maintenance', sub: 'Reactive Support' },
+                                    { value: '30+', label: 'Tenaga Profesional', sub: 'Teknisi Berpengalaman' },
+                                    { value: 'OSHA', label: 'Compliant', sub: 'Terdaftar HSSE Safety' },
                                 ].map((stat) => (
                                     <div
                                         key={stat.label}
@@ -85,6 +87,19 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                                         <div className="text-xs text-slate-400 mt-0.5">{stat.sub}</div>
                                     </div>
                                 ))}
+                            </div>
+                        </div>
+
+                        {/* Award badge */}
+                        <div className="mt-8 inline-flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-3 backdrop-blur-sm">
+                            <div className="w-9 h-9 bg-yellow-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div className="text-white text-sm font-semibold">Contractor of the Year 2018</div>
+                                <div className="text-slate-400 text-xs">Penghargaan atas prestasi proyek terbaik</div>
                             </div>
                         </div>
                     </div>
@@ -102,7 +117,7 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                             </h2>
                             <p className="text-gray-500 max-w-2xl mx-auto">
                                 Kami hadir sebagai mitra terpercaya dalam solusi teknik HVAC dan Refrigerasi dengan standar
-                                kualitas dan keselamatan kerja tertinggi.
+                                kualitas, kecepatan layanan, dan keselamatan kerja tertinggi.
                             </p>
                         </div>
 
@@ -117,8 +132,11 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                                 </div>
                                 <h3 className="text-xl font-bold mb-3">Visi</h3>
                                 <p className="text-blue-100 leading-relaxed">
-                                    Menjadi perusahaan kontraktor HVAC & Refrigerasi terdepan dan terpercaya di Indonesia,
-                                    yang dikenal atas kualitas kerja, inovasi teknologi, dan komitmen terhadap kepuasan pelanggan.
+                                    Dengan konsep fokus di bidang Pendingin Refrigerasi dan Tata Udara, kami menjadi jawaban
+                                    dari kebutuhan akan kualitas dan kecepatan layanan. Berawal dari layanan Service, Maintenance,
+                                    dan Design untuk kebutuhan Pendingin Tata Udara dan Refrigerasi — berkembang sebagai bisnis
+                                    partner strategis yang sanggup memberikan kepuasan dan kenyamanan bagi Personal maupun
+                                    Corporate Customer.
                                 </p>
                             </div>
 
@@ -131,10 +149,10 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                                 <h3 className="text-xl font-bold text-gray-900 mb-4">Misi</h3>
                                 <ul className="space-y-3 text-gray-600">
                                     {[
-                                        'Memberikan solusi HVAC & Refrigerasi berkualitas tinggi dengan teknologi terkini',
-                                        'Mengutamakan keselamatan kerja (HSSE) dalam setiap pelaksanaan proyek',
-                                        'Membangun hubungan jangka panjang berbasis kepercayaan dengan klien',
-                                        'Mengembangkan SDM yang kompeten dan profesional di bidang HVAC',
+                                        'Menerapkan teknologi tepat guna dan selalu melakukan inovasi baru melalui pendekatan kehati-hatian dan ramah lingkungan',
+                                        'Meningkatkan kualitas dan profesionalisme sehingga dapat memberikan pelayanan prima kepada seluruh Customer',
+                                        'Memberikan pelatihan guna memajukan ketrampilan SDM dalam rangka kerjasama operasional perawatan mesin pendingin dan tata udara',
+                                        'Memberikan layanan dengan kecepatan respon, kendali mutu, dan garansi sehingga setiap mitra mendapat pelayanan yang memuaskan',
                                     ].map((item) => (
                                         <li key={item} className="flex items-start gap-3 text-sm">
                                             <span className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -187,10 +205,9 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                                         <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                                     </svg>
                                     <p className="text-gray-700 text-lg leading-relaxed mb-6 italic">
-                                        "Sejak 2014, CV. Muara Karya berdiri di atas fondasi integritas, keahlian, dan dedikasi penuh terhadap
-                                        kepuasan klien. Kami percaya bahwa setiap proyek adalah amanah, dan setiap solusi yang kami berikan
-                                        harus memberikan nilai nyata bagi kehidupan dan bisnis klien kami. Bersama tim profesional yang
-                                        berkomitmen, kami terus bertumbuh menjadi mitra terbaik dalam solusi HVAC & Refrigerasi."
+                                        "Komitmen kami adalah memberikan jasa dan dukungan handal agar dapat menambah jumlah
+                                        basis pelanggan dengan standar nilai terbaik & Peningkatan kepuasan pelanggan dengan
+                                        memberikan tanggapan yang cepat dan penyediaan tenaga teknik yang memadai."
                                     </p>
                                     <div>
                                         <div className="font-bold text-gray-900 text-lg">Denny Alamsyah Priatna</div>
