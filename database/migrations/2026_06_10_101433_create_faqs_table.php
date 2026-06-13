@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('faqs', function (Blueprint $table) {
             $table->id();
-            $table->text('question');
+            $table->string('question');
             $table->text('answer');
-            $table->unsignedSmallInteger('sort_order')->default(0);
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')->default(1);
+            $table->integer('sort_order')->default(0);
             $table->timestamps();
         });
     }
