@@ -28,9 +28,14 @@ export default function CompanyFooter() {
                     {/* Col 1 — Brand */}
                     <div className="lg:col-span-1">
                         <Link href="/" className="flex items-center gap-3 mb-4">
-                            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <span className="text-white font-bold text-sm">MK</span>
-                            </div>
+                            {/* Gambar logo kamu */}
+                            <img 
+                                src="/logo/logomk.svg"
+                                alt="Logo CV. Muara Karya" 
+                                className="h-10 w-auto object-contain" 
+                            />
+                            
+                            {/* Teks sebelah logo (Hapus kalau logomu sudah ada teksnya) */}
                             <div className="leading-tight">
                                 <div className="font-bold text-white text-base">CV. Muara Karya</div>
                                 <div className="text-xs text-blue-400">HVAC & Refrigerasi</div>
@@ -40,9 +45,9 @@ export default function CompanyFooter() {
                             Kontraktor HVAC & Refrigerasi terpercaya sejak 2014. Melayani instalasi,
                             pengadaan, dan perawatan sistem pendingin untuk hunian dan komersial.
                         </p>
-                        {/* Social / WhatsApp */}
+                        {/* WhatsApp */}
                         <a
-                            href="https://wa.me/6281234567890"
+                            href="https://wa.me/6287778440548"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 bg-green-600/20 hover:bg-green-600/30 border border-green-600/30 text-green-400 text-sm px-4 py-2 rounded-lg transition-colors"
@@ -103,12 +108,8 @@ export default function CompanyFooter() {
                                 </div>
                                 <div>
                                     <p className="text-xs text-slate-500 mb-0.5">Email</p>
-                                    <a href="mailto:info@muarakarya.co.id" className="text-sm text-slate-300 hover:text-blue-400 transition-colors">
-                                        info@muarakarya.co.id
-                                    </a>
-                                    <br />
-                                    <a href="mailto:hrd@muarakarya.co.id" className="text-sm text-slate-300 hover:text-blue-400 transition-colors">
-                                        hrd@muarakarya.co.id
+                                    <a href="mailto:Muara.karya@gmail.com" className="text-sm text-slate-300 hover:text-blue-400 transition-colors">
+                                        Muara.karya@gmail.com
                                     </a>
                                 </div>
                             </li>
@@ -120,8 +121,8 @@ export default function CompanyFooter() {
                                 </div>
                                 <div>
                                     <p className="text-xs text-slate-500 mb-0.5">Telepon / WhatsApp</p>
-                                    <a href="tel:+6281234567890" className="text-sm text-slate-300 hover:text-blue-400 transition-colors">
-                                        +62 812-3456-7890
+                                    <a href="tel:+6287778440548" className="text-sm text-slate-300 hover:text-blue-400 transition-colors">
+                                        +62 877-7844-0548
                                     </a>
                                 </div>
                             </li>
@@ -135,7 +136,7 @@ export default function CompanyFooter() {
                                 <div>
                                     <p className="text-xs text-slate-500 mb-0.5">Alamat</p>
                                     <p className="text-sm text-slate-300 leading-relaxed">
-                                        Bekasi, Jawa Barat,<br />Indonesia
+                                        Jl. Galaxy III No.57 Margahayu Raya,<br />Bandung, Jawa Barat
                                     </p>
                                 </div>
                             </li>
@@ -150,11 +151,6 @@ export default function CompanyFooter() {
                     <p className="text-slate-500 text-sm">
                         &copy; {new Date().getFullYear()} CV. Muara Karya. Kontraktor HVAC & Refrigerasi sejak 2014.
                     </p>
-                    <div className="flex items-center gap-4 text-xs text-slate-600">
-                        <Link href="/karir" className="hover:text-slate-400 transition-colors">Karir</Link>
-                        <span>·</span>
-                        <Link href="/client" className="hover:text-slate-400 transition-colors">Mitra</Link>
-                    </div>
                 </div>
             </div>
         </footer>

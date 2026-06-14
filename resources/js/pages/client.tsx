@@ -188,8 +188,8 @@ export default function ClientsAndPartners() {
                                 <h3 className="text-2xl lg:text-3xl font-bold mb-4 text-white">Layanan Purna Jual Terpercaya</h3>
                                 <p className="max-w-prose text-base lg:text-lg text-slate-300 leading-relaxed">
                                     Kami melayani berbagai proyek HVAC & Refrigerasi untuk klien korporat dan institusi. Sebagai
-                                    Auto Service Dealer dari beberapa merek ternama — Gree, Daikin, Toshiba, Panasonic, Carrier,
-                                    dan Bitzer — kami menyediakan layanan purna jual dan dukungan teknis yang dapat diandalkan
+                                    Auto Service Dealer dari beberapa merek ternama Gree, Daikin, Toshiba, Panasonic, Carrier,
+                                    dan Bitzer, kami menyediakan layanan purna jual dan dukungan teknis yang dapat diandalkan
                                     untuk memastikan efisiensi kerja mesin tetap stabil dan tahan lama.
                                 </p>
                             </div>

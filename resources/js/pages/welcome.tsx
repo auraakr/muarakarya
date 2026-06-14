@@ -134,7 +134,7 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                                 <p className="text-blue-100 leading-relaxed">
                                     Dengan konsep fokus di bidang Pendingin Refrigerasi dan Tata Udara, kami menjadi jawaban
                                     dari kebutuhan akan kualitas dan kecepatan layanan. Berawal dari layanan Service, Maintenance,
-                                    dan Design untuk kebutuhan Pendingin Tata Udara dan Refrigerasi — berkembang sebagai bisnis
+                                    dan Design untuk kebutuhan Pendingin Tata Udara dan Refrigerasi, berkembang sebagai bisnis
                                     partner strategis yang sanggup memberikan kepuasan dan kenyamanan bagi Personal maupun
                                     Corporate Customer.
                                 </p>
@@ -196,9 +196,11 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                         <div className="bg-gradient-to-r from-blue-50 to-slate-50 rounded-2xl p-8 lg:p-12 border border-slate-200">
                             <div className="flex flex-col lg:flex-row gap-8 items-start">
                                 <div className="flex-shrink-0">
-                                    <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-900 rounded-2xl flex items-center justify-center">
-                                        <span className="text-white font-bold text-xl">DA</span>
-                                    </div>
+                                    <img 
+                                        src="/logo/ceobg.svg" 
+                                        alt="Denny Alamsyah Priatna" 
+                                        className="w-28 h-28 lg:w-32 lg:h-32 rounded-full object-cover border-4 border-white shadow-md"
+                                    />
                                 </div>
                                 <div>
                                     <svg className="w-8 h-8 text-blue-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
@@ -230,7 +232,7 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                                 Solusi Lengkap HVAC & Refrigerasi
                             </h2>
                             <p className="text-gray-500 max-w-2xl mx-auto">
-                                Dari instalasi hingga perawatan berkala — kami menangani kebutuhan sistem HVAC Anda dari awal hingga akhir.
+                                Dari instalasi hingga perawatan berkala, kami menangani kebutuhan sistem HVAC Anda dari awal hingga akhir.
                             </p>
                         </div>
 
@@ -273,50 +275,17 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                         <div className="grid lg:grid-cols-2 rounded-3xl overflow-hidden shadow-xl border border-slate-200">
 
                             {/* Left — person image panel */}
-                            <div className="relative bg-gradient-to-br from-blue-900 via-slate-800 to-slate-900 min-h-[520px] flex flex-col justify-end overflow-hidden">
-                                {/* Decorative blobs */}
-                                <div className="absolute top-0 left-0 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-                                <div className="absolute bottom-0 right-0 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3" />
-
-                                {/* Dot grid */}
-                                <div className="absolute inset-0"
-                                    style={{
-                                        backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)',
-                                        backgroundSize: '28px 28px',
-                                    }}
+                            <div className="relative bg-slate-900 min-h-[520px] flex flex-col justify-end overflow-hidden">
+                                
+                                {/* Foto Latar Belakang Penuh */}
+                                <img 
+                                    src="/logo/faq.svg" 
+                                    alt="Layanan Muara Karya" 
+                                    className="absolute inset-0 w-full h-full object-cover"
                                 />
 
-                                {/* Person silhouette */}
-                                <div className="relative flex justify-center items-end flex-1 pt-12 px-8">
-                                    <svg viewBox="0 0 260 340" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-52 lg:w-64 drop-shadow-2xl">
-                                        {/* Hard hat */}
-                                        <ellipse cx="130" cy="72" rx="52" ry="14" fill="#1d4ed8" opacity="0.9"/>
-                                        <path d="M80 72 Q78 50 130 44 Q182 50 180 72Z" fill="#1d4ed8" opacity="0.9"/>
-                                        {/* Head */}
-                                        <ellipse cx="130" cy="88" rx="30" ry="34" fill="#fbbf24" opacity="0.85"/>
-                                        {/* Face details */}
-                                        <ellipse cx="120" cy="85" rx="4" ry="5" fill="#92400e" opacity="0.5"/>
-                                        <ellipse cx="140" cy="85" rx="4" ry="5" fill="#92400e" opacity="0.5"/>
-                                        <path d="M118 100 Q130 110 142 100" stroke="#92400e" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.5"/>
-                                        {/* Vest / Body */}
-                                        <path d="M95 120 L75 240 L185 240 L165 120 Q148 112 130 110 Q112 112 95 120Z" fill="#1e40af" opacity="0.9"/>
-                                        {/* High-vis stripes */}
-                                        <rect x="78" y="170" width="104" height="12" rx="2" fill="#fbbf24" opacity="0.75"/>
-                                        <rect x="78" y="195" width="104" height="12" rx="2" fill="#fbbf24" opacity="0.75"/>
-                                        {/* Left arm */}
-                                        <path d="M95 125 L58 210 L74 218 L108 138Z" fill="#1e3a8a" opacity="0.9"/>
-                                        {/* Right arm */}
-                                        <path d="M165 125 L202 210 L186 218 L152 138Z" fill="#1e3a8a" opacity="0.9"/>
-                                        {/* Wrench in hand */}
-                                        <rect x="188" y="205" width="8" height="28" rx="4" fill="#94a3b8" opacity="0.9" transform="rotate(-20 192 219)"/>
-                                        <ellipse cx="191" cy="207" rx="7" ry="5" fill="#64748b" opacity="0.9" transform="rotate(-20 191 207)"/>
-                                        {/* Pants */}
-                                        <path d="M75 240 L85 320 L125 320 L130 270 L135 320 L175 320 L185 240Z" fill="#1e293b" opacity="0.95"/>
-                                        {/* Boots */}
-                                        <rect x="82" y="312" width="46" height="18" rx="6" fill="#0f172a" opacity="1"/>
-                                        <rect x="132" y="312" width="46" height="18" rx="6" fill="#0f172a" opacity="1"/>
-                                    </svg>
-                                </div>
+                                {/* Efek gradasi gelap agar teks pertanyaan di bawah tetap terbaca jelas */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent" />
 
                                 {/* Bottom overlay card */}
                                 <div className="relative bg-white/10 backdrop-blur-sm border-t border-white/10 px-8 py-6">
@@ -324,7 +293,7 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                                         Ada pertanyaan tentang proyek Anda?
                                     </p>
                                     <p className="text-slate-300 text-sm mt-1">
-                                        Tim kami siap membantu — konsultasi awal gratis.
+                                        Tim kami siap membantu, konsultasi awal gratis.
                                     </p>
                                 </div>
                             </div>

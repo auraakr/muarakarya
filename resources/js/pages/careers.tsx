@@ -24,7 +24,7 @@ const jobs: Job[] = [
         title: 'Teknisi HVAC & Refrigerasi',
         department: 'Engineering',
         type: 'Full-time',
-        location: 'Bekasi, Jawa Barat',
+        location: 'Bandung, Jawa Barat',
         deadline: '31 Jul 2026',
         summary: 'Bertanggung jawab atas instalasi, perawatan preventif, dan perbaikan sistem AC, chiller, serta refrigerasi di site klien.',
         responsibilities: [
@@ -39,7 +39,7 @@ const jobs: Job[] = [
             'Pengalaman min. 1 tahun sebagai teknisi AC / HVAC',
             'Memahami sistem refrigerasi, ducting, dan kelistrikan dasar',
             'Memiliki SIM A / C (diutamakan)',
-            'Bersedia ditempatkan di lokasi proyek (area Jabodetabek)',
+            'Bersedia ditempatkan di lokasi proyek (area Jawa Barat & Jabotabek)',
         ],
         benefits: ['BPJS Kesehatan & Ketenagakerjaan', 'Tunjangan transport & makan', 'Lembur dibayar', 'Pelatihan & sertifikasi teknis'],
     },
@@ -48,7 +48,7 @@ const jobs: Job[] = [
         title: 'Project Manager HVAC',
         department: 'Engineering',
         type: 'Full-time',
-        location: 'Jakarta Selatan',
+        location: 'Bandung, Jawa Barat',
         deadline: '15 Agu 2026',
         summary: 'Memimpin dan mengelola proyek instalasi HVAC skala menengah–besar dari perencanaan, pelaksanaan, hingga serah terima kepada klien.',
         responsibilities: [
@@ -72,7 +72,7 @@ const jobs: Job[] = [
         title: 'Estimator / Quantity Surveyor',
         department: 'Engineering',
         type: 'Full-time',
-        location: 'Bekasi, Jawa Barat',
+        location: 'Bandung, Jawa Barat',
         deadline: '31 Jul 2026',
         summary: 'Menyusun estimasi biaya, Bill of Quantity (BOQ), dan penawaran teknis untuk proyek-proyek HVAC yang akan ditenderkan.',
         responsibilities: [
@@ -96,7 +96,7 @@ const jobs: Job[] = [
         title: 'Sales & Business Development',
         department: 'Sales',
         type: 'Full-time',
-        location: 'Jakarta',
+        location: 'Bandung, Jawa Barat',
         deadline: '31 Jul 2026',
         summary: 'Mengembangkan bisnis perusahaan dengan mencari klien baru, membangun relasi strategis, dan menutup kontrak proyek HVAC.',
         responsibilities: [
@@ -111,7 +111,7 @@ const jobs: Job[] = [
             'Pengalaman min. 1 tahun di bidang sales B2B, diutamakan proyek / kontraktor',
             'Memiliki jaringan relasi di industri properti, industri, atau fasilitas',
             'Komunikatif, persuasif, dan sangat berorientasi pada target',
-            'Memiliki SIM A dan bersedia mobile di area Jabodetabek',
+            'Memiliki SIM A dan bersedia mobile di area Jawa Barat & Jabotabek',
         ],
         benefits: ['BPJS Kesehatan & Ketenagakerjaan', 'Komisi penjualan kompetitif', 'Tunjangan kendaraan & komunikasi', 'Incentive trip tahunan'],
     },
@@ -120,7 +120,7 @@ const jobs: Job[] = [
         title: 'Admin Operasional & Keuangan',
         department: 'Admin',
         type: 'Full-time',
-        location: 'Bekasi, Jawa Barat',
+        location: 'Bandung, Jawa Barat',
         deadline: '31 Jul 2026',
         summary: 'Mengelola administrasi operasional harian, dokumen proyek, dan pembukuan untuk mendukung kelancaran operasional perusahaan.',
         responsibilities: [
@@ -194,7 +194,7 @@ export default function Careers() {
                         {/* Quick stats */}
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-3xl mx-auto">
                             {[
-                                { icon: '🏢', label: 'Kantor Nyaman', sub: 'Bekasi & Jakarta' },
+                                { icon: '🏢', label: 'Kantor Nyaman', sub: 'Margahayu Raya, Bandung' },
                                 { icon: '📈', label: 'Karir Berkembang', sub: 'Pelatihan rutin' },
                                 { icon: '🛡️', label: 'BPJS Lengkap', sub: 'Kesehatan & TK' },
                                 { icon: '⚙️', label: 'Tim Profesional', sub: 'Sejak 2014' },
@@ -365,7 +365,7 @@ export default function Careers() {
                                                         </div>
                                                     </div>
                                                     <a
-                                                        href={`mailto:hrd@muarakarya.co.id?subject=Lamaran: ${job.title}&body=Halo Tim HRD CV. Muara Karya,%0A%0ASaya tertarik untuk melamar posisi ${job.title}.%0A%0ATerlampir CV saya.%0A%0ATerima kasih.`}
+                                                        href={`mailto:Muara.karya@gmail.com?subject=Lamaran: ${job.title}&body=Halo Tim HRD CV. Muara Karya,%0A%0ASaya tertarik untuk melamar posisi ${job.title}.%0A%0ATerlampir CV saya.%0A%0ATerima kasih.`}
                                                         className="flex-shrink-0 bg-blue-700 hover:bg-blue-800 text-white px-6 py-2.5 rounded-lg text-sm font-semibold transition-colors flex items-center gap-2"
                                                     >
                                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -400,7 +400,7 @@ export default function Careers() {
                                     menghubungi jika ada posisi yang relevan di masa mendatang.
                                 </p>
                                 <a
-                                    href="mailto:hrd@muarakarya.co.id?subject=Open Application — CV Terbuka&body=Halo Tim HRD CV. Muara Karya,%0A%0ASaya ingin mengirimkan CV terbuka dan berharap dapat bergabung jika ada posisi yang sesuai.%0A%0ATerlampir CV saya.%0A%0ATerima kasih."
+                                    href="mailto:Muara.karya@gmail.com?subject=Open Application — CV Terbuka&body=Halo Tim HRD CV. Muara Karya,%0A%0ASaya ingin mengirimkan CV terbuka dan berharap dapat bergabung jika ada posisi yang sesuai.%0A%0ATerlampir CV saya.%0A%0ATerima kasih."
                                     className="inline-flex items-center gap-2 bg-white text-blue-800 hover:bg-blue-50 px-6 py-2.5 rounded-lg text-sm font-semibold transition-colors"
                                 >
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
