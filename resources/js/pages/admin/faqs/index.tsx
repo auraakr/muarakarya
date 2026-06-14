@@ -25,15 +25,15 @@ export default function FaqIndex({ faqs }: Props) {
             <Head title="Kelola FAQ" />
             <div className="space-y-6">
                 {flash?.success && (
-                    <div className="rounded-lg bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-700">
+                    <div className="rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 px-4 py-3 text-sm text-green-700 dark:text-green-400">
                         {flash.success}
                     </div>
                 )}
 
                 <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-xl font-bold text-gray-900">Kelola FAQ</h1>
-                        <p className="text-sm text-gray-500 mt-0.5">{faqs.length} pertanyaan terdaftar</p>
+                        <h1 className="text-xl font-bold text-foreground">Kelola FAQ</h1>
+                        <p className="text-sm text-muted-foreground mt-0.5">{faqs.length} pertanyaan terdaftar</p>
                     </div>
                     <Link
                         href="/admin/faqs/create"
@@ -46,9 +46,9 @@ export default function FaqIndex({ faqs }: Props) {
                     </Link>
                 </div>
 
-                <div className="rounded-xl border border-gray-200 overflow-hidden bg-white">
+                <div className="rounded-xl border border-border overflow-hidden bg-card">
                     {faqs.length === 0 ? (
-                        <div className="py-16 text-center text-gray-400">
+                        <div className="py-16 text-center text-muted-foreground">
                             <svg className="w-10 h-10 mx-auto mb-3 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
@@ -57,26 +57,30 @@ export default function FaqIndex({ faqs }: Props) {
                     ) : (
                         <table className="w-full text-sm">
                             <thead>
-                                <tr className="bg-gray-50 border-b border-gray-200">
-                                    <th className="text-left px-5 py-3 font-semibold text-gray-600 w-8">#</th>
-                                    <th className="text-left px-5 py-3 font-semibold text-gray-600">Pertanyaan</th>
-                                    <th className="text-left px-5 py-3 font-semibold text-gray-600 hidden md:table-cell">Jawaban</th>
-                                    <th className="text-center px-5 py-3 font-semibold text-gray-600 w-24">Status</th>
+                                <tr className="bg-muted border-b border-border">
+                                    <th className="text-left px-5 py-3 font-semibold text-muted-foreground w-8">#</th>
+                                    <th className="text-left px-5 py-3 font-semibold text-muted-foreground">Pertanyaan</th>
+                                    <th className="text-left px-5 py-3 font-semibold text-muted-foreground hidden md:table-cell">Jawaban</th>
+                                    <th className="text-center px-5 py-3 font-semibold text-muted-foreground w-24">Status</th>
                                     <th className="px-5 py-3 w-28"></th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-100">
+                            <tbody className="divide-y divide-border">
                                 {faqs.map((faq, i) => (
-                                    <tr key={faq.id} className="hover:bg-gray-50 transition-colors">
-                                        <td className="px-5 py-4 text-gray-400">{i + 1}</td>
+                                    <tr key={faq.id} className="hover:bg-muted/50 transition-colors">
+                                        <td className="px-5 py-4 text-muted-foreground">{i + 1}</td>
                                         <td className="px-5 py-4">
-                                            <p className="font-medium text-gray-800 line-clamp-2">{faq.question}</p>
+                                            <p className="font-medium text-foreground line-clamp-2">{faq.question}</p>
                                         </td>
                                         <td className="px-5 py-4 hidden md:table-cell">
-                                            <p className="text-gray-500 line-clamp-2">{faq.answer}</p>
+                                            <p className="text-muted-foreground line-clamp-2">{faq.answer}</p>
                                         </td>
                                         <td className="px-5 py-4 text-center">
-                                            <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full ${faq.is_active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+                                            <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full ${
+                                                faq.is_active
+                                                    ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
+                                                    : 'bg-muted text-muted-foreground'
+                                            }`}>
                                                 {faq.is_active ? 'Aktif' : 'Nonaktif'}
                                             </span>
                                         </td>
@@ -84,7 +88,7 @@ export default function FaqIndex({ faqs }: Props) {
                                             <div className="flex items-center justify-end gap-2">
                                                 <Link
                                                     href={`/admin/faqs/${faq.id}/edit`}
-                                                    className="p-1.5 rounded-lg text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                                                    className="p-1.5 rounded-lg text-muted-foreground hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
                                                     title="Edit"
                                                 >
                                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -93,7 +97,7 @@ export default function FaqIndex({ faqs }: Props) {
                                                 </Link>
                                                 <button
                                                     onClick={() => handleDelete(faq.id)}
-                                                    className="p-1.5 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                                                    className="p-1.5 rounded-lg text-muted-foreground hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                                                     title="Hapus"
                                                 >
                                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
