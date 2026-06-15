@@ -46,47 +46,47 @@ export default function ServiceForm({ form, onSubmit, submitLabel, cancelHref }:
     }
 
     return (
-        <form onSubmit={onSubmit} className="bg-white rounded-xl border border-gray-200 p-6 space-y-5">
+        <form onSubmit={onSubmit} className="bg-card rounded-xl border border-border p-6 space-y-5">
             {/* Title */}
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                <label className="block text-sm font-medium text-foreground mb-1.5">
                     Judul Layanan <span className="text-red-500">*</span>
                 </label>
                 <input
                     type="text"
                     value={data.title}
                     onChange={e => setData('title', e.target.value)}
-                    className="w-full rounded-lg border border-gray-300 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full rounded-lg border border-input bg-background text-foreground px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-muted-foreground"
                     placeholder="cth. Residential & Commercial"
                 />
-                {errors.title && <p className="mt-1 text-xs text-red-600">{errors.title}</p>}
+                {errors.title && <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.title}</p>}
             </div>
 
             {/* Description */}
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                <label className="block text-sm font-medium text-foreground mb-1.5">
                     Deskripsi <span className="text-red-500">*</span>
                 </label>
                 <textarea
                     value={data.description}
                     onChange={e => setData('description', e.target.value)}
                     rows={3}
-                    className="w-full rounded-lg border border-gray-300 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                    className="w-full rounded-lg border border-input bg-background text-foreground px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none placeholder:text-muted-foreground"
                     placeholder="Deskripsi singkat layanan..."
                 />
-                {errors.description && <p className="mt-1 text-xs text-red-600">{errors.description}</p>}
+                {errors.description && <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.description}</p>}
             </div>
 
             {/* Items */}
             <div>
                 <div className="flex items-center justify-between mb-1.5">
-                    <label className="text-sm font-medium text-gray-700">
+                    <label className="text-sm font-medium text-foreground">
                         Item Checklist <span className="text-red-500">*</span>
                     </label>
                     <button
                         type="button"
                         onClick={addItem}
-                        className="text-xs text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1"
+                        className="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium flex items-center gap-1"
                     >
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
@@ -101,14 +101,14 @@ export default function ServiceForm({ form, onSubmit, submitLabel, cancelHref }:
                                 type="text"
                                 value={item}
                                 onChange={e => updateItem(index, e.target.value)}
-                                className="flex-1 rounded-lg border border-gray-300 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                className="flex-1 rounded-lg border border-input bg-background text-foreground px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-muted-foreground"
                                 placeholder={`Item ${index + 1}`}
                             />
                             <button
                                 type="button"
                                 onClick={() => removeItem(index)}
                                 disabled={data.items.length <= 1}
-                                className="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                                className="p-2 rounded-lg text-muted-foreground hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                             >
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -117,13 +117,13 @@ export default function ServiceForm({ form, onSubmit, submitLabel, cancelHref }:
                         </div>
                     ))}
                 </div>
-                {errors.items && <p className="mt-1 text-xs text-red-600">{errors.items}</p>}
+                {errors.items && <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.items}</p>}
             </div>
 
             {/* Color + Sort + Active */}
             <div className="grid grid-cols-2 gap-4">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1.5">Warna Ikon</label>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">Warna Ikon</label>
                     <div className="flex gap-2">
                         {colorOptions.map(opt => (
                             <button
@@ -132,8 +132,8 @@ export default function ServiceForm({ form, onSubmit, submitLabel, cancelHref }:
                                 onClick={() => setData('color', opt.value)}
                                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg border text-xs font-medium transition-colors ${
                                     data.color === opt.value
-                                        ? 'border-blue-500 bg-blue-50 text-blue-700'
-                                        : 'border-gray-200 text-gray-600 hover:border-gray-300'
+                                        ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'
+                                        : 'border-border text-muted-foreground hover:border-border/80'
                                 }`}
                             >
                                 <span className={`w-2.5 h-2.5 rounded-full ${opt.dot}`} />
@@ -143,13 +143,13 @@ export default function ServiceForm({ form, onSubmit, submitLabel, cancelHref }:
                     </div>
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1.5">Urutan</label>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">Urutan</label>
                     <input
                         type="number"
                         min={0}
                         value={data.sort_order}
                         onChange={e => setData('sort_order', Number(e.target.value))}
-                        className="w-full rounded-lg border border-gray-300 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full rounded-lg border border-input bg-background text-foreground px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                 </div>
             </div>
@@ -159,12 +159,12 @@ export default function ServiceForm({ form, onSubmit, submitLabel, cancelHref }:
                     type="checkbox"
                     checked={data.is_active}
                     onChange={e => setData('is_active', e.target.checked)}
-                    className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    className="w-4 h-4 rounded border-input text-blue-600 focus:ring-blue-500"
                 />
-                <span className="text-sm font-medium text-gray-700">Tampilkan di website</span>
+                <span className="text-sm font-medium text-foreground">Tampilkan di website</span>
             </label>
 
-            <div className="flex items-center gap-3 pt-2 border-t border-gray-100">
+            <div className="flex items-center gap-3 pt-2 border-t border-border">
                 <button
                     type="submit"
                     disabled={processing}
@@ -172,7 +172,7 @@ export default function ServiceForm({ form, onSubmit, submitLabel, cancelHref }:
                 >
                     {processing ? 'Menyimpan...' : submitLabel}
                 </button>
-                <Link href={cancelHref} className="text-sm text-gray-500 hover:text-gray-700">
+                <Link href={cancelHref} className="text-sm text-muted-foreground hover:text-foreground">
                     Batal
                 </Link>
             </div>
