@@ -3,8 +3,8 @@ set -e
 
 cd /var/www/html
 
-# Generate nginx config substituting $PORT (Render sets this to 10000)
-export PORT=${PORT:-10000}
+# Generate nginx config substituting $PORT (Railway sets this automatically)
+export PORT=${PORT:-8080}
 envsubst '${PORT}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
 
 # Run database migrations
