@@ -3,8 +3,8 @@ set -e
 
 cd /var/www/html
 
-# Generate nginx config substituting $PORT (Railway sets this automatically)
-export PORT=${PORT:-8080}
+# Generate nginx config — PORT is injected by Railway at runtime
+: "${PORT:?PORT env var is required}"
 envsubst '${PORT}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
 
 # Run database migrations

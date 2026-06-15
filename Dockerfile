@@ -54,6 +54,7 @@ COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/start.sh /start.sh
 RUN chmod +x /start.sh
 
-EXPOSE 10000
+ARG PORT=8080
+EXPOSE $PORT
 
 CMD ["/start.sh"]
