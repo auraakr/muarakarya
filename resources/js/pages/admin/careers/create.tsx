@@ -1,47 +1,49 @@
 import { Head, Link, useForm } from '@inertiajs/react';
-import ServiceForm from './service-form';
+import CareerForm from './career-form';
 
-export default function ServiceCreate() {
+export default function CareerCreate() {
     const form = useForm({
         title: '',
-        description: '',
-        items: [''],
-        color: 'blue',
+        department: '',
+        type: 'Full-time',
+        location: 'Bandung, Jawa Barat',
+        deadline: '',
+        summary: '',
+        responsibilities: [''],
+        requirements: [''],
+        benefits: [''],
         sort_order: 0,
         is_active: true,
     });
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-        form.post('/admin/services');
+        form.post('/admin/careers');
     }
 
     return (
         <>
-            <Head title="Tambah Layanan" />
+            <Head title="Tambah Lowongan" />
             <div className="p-6">
                 <div className="max-w-2xl space-y-6">
 
                     <div className="flex items-center gap-3">
-                        <Link
-                            href="/admin/services"
-                            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                        >
+                        <Link href="/admin/careers" className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                             </svg>
                         </Link>
                         <div>
-                            <h1 className="text-xl font-bold text-foreground">Tambah Layanan</h1>
-                            <p className="text-sm text-muted-foreground">Isi form di bawah untuk menambah layanan baru.</p>
+                            <h1 className="text-xl font-bold text-foreground">Tambah Lowongan</h1>
+                            <p className="text-sm text-muted-foreground">Isi form di bawah untuk menambah lowongan baru.</p>
                         </div>
                     </div>
 
-                    <ServiceForm
+                    <CareerForm
                         form={form}
                         onSubmit={handleSubmit}
-                        submitLabel="Simpan Layanan"
-                        cancelHref="/admin/services"
+                        submitLabel="Simpan Lowongan"
+                        cancelHref="/admin/careers"
                     />
 
                 </div>
@@ -50,10 +52,10 @@ export default function ServiceCreate() {
     );
 }
 
-ServiceCreate.layout = {
+CareerCreate.layout = {
     breadcrumbs: [
         { title: 'Dashboard', href: '/dashboard' },
-        { title: 'Layanan', href: '/admin/services' },
-        { title: 'Tambah', href: '/admin/services/create' },
+        { title: 'Karir', href: '/admin/careers' },
+        { title: 'Tambah', href: '/admin/careers/create' },
     ],
 };
