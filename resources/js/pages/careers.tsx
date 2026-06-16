@@ -61,13 +61,26 @@ export default function Careers({ jobs = [] }: { jobs: Job[] }) {
                     HERO
                 ══════════════════════════════════════════ */}
                 <section className="relative pt-16 overflow-hidden" style={{ backgroundColor: '#080808' }}>
-                    {/* bg decoration */}
+                    {/* bg decoration & image */}
                     <div className="absolute inset-0 pointer-events-none">
-                        <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-10 blur-3xl"
+                        {/* Gambar Background */}
+                        <img
+                            src="/elementpanjang/8.svg" /* Nanti ganti dengan file fotomu ya */
+                            alt="Karir Background"
+                            className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity"
+                            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                        />
+                        {/* Gradasi gelap dari kiri ke kanan agar teks tetap terbaca */}
+                        <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.2) 100%)' }} />
+
+                        {/* Cahaya Biru */}
+                        <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-20 blur-3xl"
                             style={{ backgroundColor: '#135b97', transform: 'translate(30%,-30%)' }} />
-                        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-5 blur-3xl"
+                        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-10 blur-3xl"
                             style={{ backgroundColor: '#135b97', transform: 'translate(-30%,30%)' }} />
-                        <div className="absolute inset-0 opacity-5" style={{
+                        
+                        {/* Dot grid */}
+                        <div className="absolute inset-0 opacity-[0.03]" style={{
                             backgroundImage: 'radial-gradient(circle, rgba(242,243,243,0.4) 1px, transparent 1px)',
                             backgroundSize: '28px 28px',
                         }} />
@@ -126,19 +139,36 @@ export default function Careers({ jobs = [] }: { jobs: Job[] }) {
                             }}
                         >
                             {[
-                                { value: '🏢', label: 'Kantor Nyaman', sub: 'Margahayu Raya, Bandung' },
-                                { value: '📈', label: 'Karir Berkembang', sub: 'Pelatihan rutin' },
-                                { value: '🛡️', label: 'BPJS Lengkap', sub: 'Kesehatan & TK' },
-                                { value: '⚙️', label: 'Tim Profesional', sub: 'Sejak 2014' },
+                                { 
+                                    icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>, 
+                                    label: 'Kantor Nyaman', 
+                                    sub: 'Margahayu Raya, Bandung' 
+                                },
+                                { 
+                                    icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>, 
+                                    label: 'Karir Berkembang', 
+                                    sub: 'Pelatihan rutin' 
+                                },
+                                { 
+                                    icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>, 
+                                    label: 'BPJS Lengkap', 
+                                    sub: 'Kesehatan & TK' 
+                                },
+                                { 
+                                    icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>, 
+                                    label: 'Tim Profesional', 
+                                    sub: 'Sejak 2014' 
+                                },
                             ].map((item) => (
                                 <div
                                     key={item.label}
                                     className="flex flex-col gap-1 p-5 transition-colors"
                                     style={{ backgroundColor: 'rgba(8,8,8,0.8)' }}
-                                    onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.backgroundColor = 'rgba(19,91,151,0.1)'; }}
+                                    onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.backgroundColor = 'rgba(19,91,151,0.2)'; }}
                                     onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.backgroundColor = 'rgba(8,8,8,0.8)'; }}
                                 >
-                                    <span className="text-2xl">{item.value}</span>
+                                    {/* Ganti emotikon dengan Ikon SVG berwarna biru */}
+                                    <div className="mb-2 text-[#135b97]">{item.icon}</div>
                                     <span className="text-sm font-bold" style={{ color: '#f2f3f3' }}>{item.label}</span>
                                     <span className="text-xs" style={{ color: '#5e7d9a' }}>{item.sub}</span>
                                 </div>
@@ -147,8 +177,8 @@ export default function Careers({ jobs = [] }: { jobs: Job[] }) {
                     </div>
 
                     {/* Wave */}
-                    <div className="overflow-hidden leading-none">
-                        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block">
+                    <div className="absolute bottom-0 left-0 right-0 z-10 overflow-hidden leading-none">
+                        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block" style={{ transform: 'translateY(2px)' }}>
                             <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#f2f3f3"/>
                         </svg>
                     </div>

@@ -101,10 +101,22 @@ export default function ClientsAndPartners() {
                     ref={heroRef}
                 >
                     <div className="absolute inset-0 pointer-events-none">
-                        <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-10 blur-3xl" style={{ backgroundColor: '#135b97', transform: 'translate(30%, -30%)' }} />
-                        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-5 blur-3xl" style={{ backgroundColor: '#135b97', transform: 'translate(-30%, 30%)' }} />
+                        {/* --- TAMBAHAN GAMBAR BACKGROUND DI SINI --- */}
+                        <img
+                            src="/elementpanjang/8.svg" /* Nanti ganti dengan file fotomu ya */
+                            alt="Hero Background"
+                            className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity"
+                            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                        />
+                        {/* Gradasi gelap dari kiri ke kanan agar teks tetap terbaca */}
+                        <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.2) 100%)' }} />
+
+                        {/* Hiasan cahaya biru bawaan */}
+                        <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-20 blur-3xl" style={{ backgroundColor: '#135b97', transform: 'translate(30%, -30%)' }} />
+                        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-10 blur-3xl" style={{ backgroundColor: '#135b97', transform: 'translate(-30%, 30%)' }} />
+                        
                         {/* dot grid */}
-                        <div className="absolute inset-0 opacity-5" style={{
+                        <div className="absolute inset-0 opacity-[0.03]" style={{
                             backgroundImage: 'radial-gradient(circle, rgba(242,243,243,0.4) 1px, transparent 1px)',
                             backgroundSize: '28px 28px',
                         }} />
@@ -133,8 +145,8 @@ export default function ClientsAndPartners() {
                     </div>
 
                     {/* Wave */}
-                    <div className="overflow-hidden leading-none">
-                        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block">
+                    <div className="absolute bottom-0 left-0 right-0 z-10 overflow-hidden leading-none">
+                        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block" style={{ transform: 'translateY(2px)' }}>
                             <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#f2f3f3"/>
                         </svg>
                     </div>
@@ -178,10 +190,8 @@ export default function ClientsAndPartners() {
                                     <img
                                         src={c.src}
                                         alt={c.name}
-                                        className="h-8 w-auto object-contain transition-all duration-300"
-                                        style={{ filter: 'grayscale(100%) opacity(50%)' }}
-                                        onMouseEnter={(e) => { (e.target as HTMLImageElement).style.filter = 'grayscale(0%) opacity(100%)'; }}
-                                        onMouseLeave={(e) => { (e.target as HTMLImageElement).style.filter = 'grayscale(100%) opacity(50%)'; }}
+                                        // Hapus style abu-abu, tambahkan efek zoom (group-hover:scale-110)
+                                        className="h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-110"
                                         onError={(e) => {
                                             const el = e.target as HTMLImageElement;
                                             el.style.display = 'none';
@@ -254,10 +264,8 @@ export default function ClientsAndPartners() {
                                     <img
                                         src={p.src}
                                         alt={p.name}
-                                        className="h-10 w-auto object-contain transition-all duration-300"
-                                        style={{ filter: 'grayscale(100%) brightness(0.5)' }}
-                                        onMouseEnter={(e) => { (e.target as HTMLImageElement).style.filter = 'grayscale(0%) brightness(1)'; }}
-                                        onMouseLeave={(e) => { (e.target as HTMLImageElement).style.filter = 'grayscale(100%) brightness(0.5)'; }}
+                                        // Hapus filter abu-abu, tambahkan efek group-hover:scale-110
+                                        className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-110"
                                         onError={(e) => {
                                             const el = e.target as HTMLImageElement;
                                             el.style.display = 'none';
@@ -278,22 +286,35 @@ export default function ClientsAndPartners() {
                                 </div>
                             ))}
                         </div>
+                    </div>
 
                         {/* Keterangan partner */}
                         <div className="mt-px grid grid-cols-1 lg:grid-cols-3 gap-px" style={{ backgroundColor: 'rgba(190,192,193,0.1)' }}>
                             {[
-                                { icon: '🔧', title: 'Kualitas Mutu', desc: 'Menjaga efisiensi kinerja mesin pendingin agar tetap stabil dan tahan lama.' },
-                                { icon: '📊', title: 'Analisa Actual', desc: 'Target analisa yang mengadopsi pencarian penyebab kerusakan atau sumber masalah.' },
-                                { icon: '🛡️', title: 'Terdaftar HSSE', desc: 'Safety terdaftar HSSE — standar keselamatan kerja internasional.' },
+                                { 
+                                    icon: <svg className="w-8 h-8 text-[#135b97]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>, 
+                                    title: 'Kualitas Mutu', 
+                                    desc: 'Menjaga efisiensi kinerja mesin pendingin agar tetap stabil dan tahan lama.' 
+                                },
+                                { 
+                                    icon: <svg className="w-8 h-8 text-[#135b97]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>, 
+                                    title: 'Analisa Actual', 
+                                    desc: 'Target analisa yang mengadopsi pencarian penyebab kerusakan atau sumber masalah.' 
+                                },
+                                { 
+                                    icon: <svg className="w-8 h-8 text-[#135b97]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>, 
+                                    title: 'Terdaftar HSSE', 
+                                    desc: 'Safety terdaftar HSSE — standar keselamatan kerja internasional.' 
+                                },
                             ].map((item) => (
                                 <div key={item.title} className="p-7 transition-all" style={{ backgroundColor: '#080808' }}>
-                                    <div className="text-2xl mb-3">{item.icon}</div>
+                                    {/* Memanggil ikon SVG di sini */}
+                                    <div className="mb-4">{item.icon}</div>
                                     <div className="text-sm font-black mb-2" style={{ color: '#f2f3f3' }}>{item.title}</div>
                                     <div className="text-xs leading-relaxed" style={{ color: '#5e7d9a' }}>{item.desc}</div>
                                 </div>
                             ))}
                         </div>
-                    </div>
 
                     {/* bottom wave */}
                     <div className="overflow-hidden leading-none mt-16">
