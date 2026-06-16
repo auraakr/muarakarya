@@ -19,8 +19,8 @@ type Department = 'Semua' | 'Engineering' | 'Sales' | 'Admin';
 interface Job {
     id: number;
     title: string;
-    department: Exclude<Department, 'Semua'>;
-    type: 'Full-time' | 'Contract';
+    department: string;
+    type: string;
     location: string;
     deadline: string;
     summary: string;
@@ -28,129 +28,6 @@ interface Job {
     requirements: string[];
     benefits: string[];
 }
-
-const jobs: Job[] = [
-    {
-        id: 1,
-        title: 'Teknisi HVAC & Refrigerasi',
-        department: 'Engineering',
-        type: 'Full-time',
-        location: 'Bandung, Jawa Barat',
-        deadline: '31 Jul 2026',
-        summary: 'Bertanggung jawab atas instalasi, perawatan preventif, dan perbaikan sistem AC, chiller, serta refrigerasi di site klien.',
-        responsibilities: [
-            'Melakukan instalasi dan komisioning sistem HVAC/refrigerasi',
-            'Melaksanakan preventive maintenance sesuai jadwal yang ditetapkan',
-            'Mendiagnosa dan menangani kerusakan sistem secara reaktif',
-            'Membuat laporan teknis dan dokumentasi hasil pekerjaan',
-            'Menjaga standar K3 dan prosedur HSSE di setiap pekerjaan',
-        ],
-        requirements: [
-            'Min. SMK Teknik Pendingin / Refrigerasi atau D3 Teknik Mesin / Elektro',
-            'Pengalaman min. 1 tahun sebagai teknisi AC / HVAC',
-            'Memahami sistem refrigerasi, ducting, dan kelistrikan dasar',
-            'Memiliki SIM A / C (diutamakan)',
-            'Bersedia ditempatkan di lokasi proyek (area Jawa Barat & Jabotabek)',
-        ],
-        benefits: ['BPJS Kesehatan & Ketenagakerjaan', 'Tunjangan transport & makan', 'Lembur dibayar', 'Pelatihan & sertifikasi teknis'],
-    },
-    {
-        id: 2,
-        title: 'Project Manager HVAC',
-        department: 'Engineering',
-        type: 'Full-time',
-        location: 'Bandung, Jawa Barat',
-        deadline: '15 Agu 2026',
-        summary: 'Memimpin dan mengelola proyek instalasi HVAC skala menengah–besar dari perencanaan, pelaksanaan, hingga serah terima kepada klien.',
-        responsibilities: [
-            'Merencanakan, mengelola, dan mengawasi jalannya proyek HVAC end-to-end',
-            'Berkoordinasi dengan subkontraktor, vendor, dan perwakilan klien',
-            'Memastikan proyek selesai tepat scope, budget, dan timeline',
-            'Menyusun laporan progres dan presentasi kepada klien',
-            'Mengelola risiko proyek dan mengkoordinasikan mitigasinya',
-        ],
-        requirements: [
-            'S1 Teknik Mesin, Teknik Elektro, atau bidang relevan',
-            'Pengalaman min. 3 tahun sebagai PM atau Site Engineer di HVAC / MEP',
-            'Mampu membaca gambar teknik dan memahami spesifikasi HVAC',
-            'Terbiasa menggunakan MS Project atau alat manajemen proyek sejenis',
-            'Kemampuan komunikasi, negosiasi, dan kepemimpinan yang baik',
-        ],
-        benefits: ['BPJS Kesehatan & Ketenagakerjaan', 'Tunjangan jabatan', 'Kendaraan operasional', 'Bonus project completion'],
-    },
-    {
-        id: 3,
-        title: 'Estimator / Quantity Surveyor',
-        department: 'Engineering',
-        type: 'Full-time',
-        location: 'Bandung, Jawa Barat',
-        deadline: '31 Jul 2026',
-        summary: 'Menyusun estimasi biaya, Bill of Quantity (BOQ), dan penawaran teknis untuk proyek-proyek HVAC yang akan ditenderkan.',
-        responsibilities: [
-            'Melakukan material takeoff dan penyusunan BOQ dari gambar desain',
-            'Menyusun Rencana Anggaran Biaya (RAB) yang akurat dan kompetitif',
-            'Menganalisa dokumen tender dan menyiapkan dokumen penawaran',
-            'Berkoordinasi dengan tim engineering untuk klarifikasi teknis',
-            'Memonitor harga material dan mengupdate database harga secara berkala',
-        ],
-        requirements: [
-            'D3 / S1 Teknik Mesin, Teknik Sipil, atau Arsitektur',
-            'Pengalaman min. 2 tahun di bidang estimasi MEP / HVAC',
-            'Mahir menggunakan AutoCAD dan MS Excel tingkat lanjut',
-            'Memahami spesifikasi teknis dan standar harga material HVAC',
-            'Teliti, sistematis, dan terbiasa bekerja dengan deadline ketat',
-        ],
-        benefits: ['BPJS Kesehatan & Ketenagakerjaan', 'Tunjangan transport & makan', 'Bonus performance tahunan'],
-    },
-    {
-        id: 4,
-        title: 'Sales & Business Development',
-        department: 'Sales',
-        type: 'Full-time',
-        location: 'Bandung, Jawa Barat',
-        deadline: '31 Jul 2026',
-        summary: 'Mengembangkan bisnis perusahaan dengan mencari klien baru, membangun relasi strategis, dan menutup kontrak proyek HVAC.',
-        responsibilities: [
-            'Mencari dan mengembangkan prospek klien baru (B2B)',
-            'Melakukan presentasi dan proposal layanan kepada calon klien',
-            'Membangun dan menjaga hubungan jangka panjang dengan klien existing',
-            'Berkoordinasi dengan tim teknis untuk penyusunan penawaran harga',
-            'Memenuhi target penjualan bulanan dan kuartalan',
-        ],
-        requirements: [
-            'D3 / S1 semua jurusan, diutamakan Teknik atau Manajemen Bisnis',
-            'Pengalaman min. 1 tahun di bidang sales B2B, diutamakan proyek / kontraktor',
-            'Memiliki jaringan relasi di industri properti, industri, atau fasilitas',
-            'Komunikatif, persuasif, dan sangat berorientasi pada target',
-            'Memiliki SIM A dan bersedia mobile di area Jawa Barat & Jabotabek',
-        ],
-        benefits: ['BPJS Kesehatan & Ketenagakerjaan', 'Komisi penjualan kompetitif', 'Tunjangan kendaraan & komunikasi', 'Incentive trip tahunan'],
-    },
-    {
-        id: 5,
-        title: 'Admin Operasional & Keuangan',
-        department: 'Admin',
-        type: 'Full-time',
-        location: 'Bandung, Jawa Barat',
-        deadline: '31 Jul 2026',
-        summary: 'Mengelola administrasi operasional harian, dokumen proyek, dan pembukuan untuk mendukung kelancaran operasional perusahaan.',
-        responsibilities: [
-            'Mengelola dokumen kontrak, PO, invoice, dan faktur proyek',
-            'Membantu proses pengadaan material dan koordinasi pengiriman',
-            'Membuat laporan keuangan sederhana dan rekonsiliasi kas harian',
-            'Mengelola arsip dokumen fisik dan digital perusahaan',
-            'Mendukung kebutuhan administratif manajemen dan tim lapangan',
-        ],
-        requirements: [
-            'D3 / S1 Akuntansi, Manajemen, atau Administrasi Bisnis',
-            'Pengalaman min. 1 tahun sebagai admin / keuangan di perusahaan konstruksi / jasa',
-            'Mahir menggunakan MS Office, terutama Excel',
-            'Familiar dengan software akuntansi (Accurate / Jurnal.id) adalah nilai plus',
-            'Teliti, rapi, dan mampu bekerja secara multitasking',
-        ],
-        benefits: ['BPJS Kesehatan & Ketenagakerjaan', 'Tunjangan transport & makan', 'THR', 'Lingkungan kerja profesional & kekeluargaan'],
-    },
-];
 
 const deptStyle: Record<Exclude<Department, 'Semua'>, { bg: string; text: string; border: string }> = {
     Engineering: { bg: 'rgba(19,91,151,0.1)', text: '#135b97', border: 'rgba(19,91,151,0.2)' },
@@ -160,7 +37,7 @@ const deptStyle: Record<Exclude<Department, 'Semua'>, { bg: string; text: string
 
 const filters: Department[] = ['Semua', 'Engineering', 'Sales', 'Admin'];
 
-export default function Careers() {
+export default function Careers({ jobs = [] }: { jobs: Job[] }) {
     const [activeFilter, setActiveFilter] = useState<Department>('Semua');
     const [expandedId, setExpandedId] = useState<number | null>(null);
     const [heroVisible, setHeroVisible] = useState(false);
@@ -172,7 +49,7 @@ export default function Careers() {
         return () => clearTimeout(t);
     }, []);
 
-    const filtered = activeFilter === 'Semua' ? jobs : jobs.filter((j) => j.department === activeFilter);
+    const filtered = activeFilter === 'Semua' ? jobs : jobs.filter((j: Job) => j.department === activeFilter);
 
     return (
         <>
@@ -323,7 +200,7 @@ export default function Careers() {
                         <div className="space-y-px" style={{ backgroundColor: '#bec0c1' }}>
                             {filtered.map((job, idx) => {
                                 const isOpen = expandedId === job.id;
-                                const dept = deptStyle[job.department];
+                                const dept = deptStyle[job.department as keyof typeof deptStyle] ?? deptStyle.Engineering;
                                 return (
                                     <div
                                         key={job.id}

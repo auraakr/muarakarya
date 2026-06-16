@@ -1,5 +1,5 @@
-import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, ChevronRight, FolderGit2, HelpCircle, LayoutGrid, Wrench } from 'lucide-react';
+import { Link, router, usePage } from '@inertiajs/react';
+import { BookOpen, Briefcase, ChevronRight, FolderGit2, HelpCircle, LayoutGrid, LogOut, Wrench } from 'lucide-react';
 import type { ReactNode } from 'react';
 
 import AppLogo from '@/components/app-logo';
@@ -29,6 +29,7 @@ const mainNavItems: NavEntry[] = [
     { title: 'Dashboard', href: dashboard(), icon: LayoutGrid },
     { title: 'FAQ',       href: '/admin/faqs',     icon: HelpCircle },
     { title: 'Layanan',   href: '/admin/services', icon: Wrench },
+    { title: 'Karir',     href: '/admin/careers',  icon: Briefcase },
 ];
 
 const generalNavItems: NavEntry[] = [
@@ -150,16 +151,26 @@ export function AppSidebar() {
                     <p className="text-[11px] font-medium text-white/60">Head Office</p>
                     <p className="mt-1 text-sm font-semibold">{user?.name ?? 'Guest User'}</p>
                     <p className="text-xs text-white/60">Administrator</p>
-                    <Button
-                        asChild
-                        size="sm"
-                        className="mt-3 w-full justify-between bg-white/10 text-white hover:bg-white/20 border-0"
-                    >
-                        <Link href="/settings/profile">
-                            Lihat Profil
-                            <ChevronRight className="size-4" />
-                        </Link>
-                    </Button>
+                    <div className="mt-3 flex gap-2">
+                        <Button
+                            asChild
+                            size="sm"
+                            className="flex-1 justify-between bg-white/10 text-white hover:bg-white/20 border-0"
+                        >
+                            <Link href="/settings/profile">
+                                Lihat Profil
+                                <ChevronRight className="size-4" />
+                            </Link>
+                        </Button>
+                        <Button
+                            size="sm"
+                            onClick={() => router.post('/logout')}
+                            className="bg-white/10 text-white hover:bg-red-500/80 border-0 px-2.5"
+                            title="Logout"
+                        >
+                            <LogOut className="size-4" />
+                        </Button>
+                    </div>
                 </div>
 
                 {/* Avatar-only — collapsed sidebar */}
@@ -172,6 +183,15 @@ export function AppSidebar() {
                                     <AvatarFallback className="rounded-lg bg-[#0f2d4a] text-white">{initials}</AvatarFallback>
                                 </Avatar>
                             </Link>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                        <SidebarMenuButton
+                            onClick={() => router.post('/logout')}
+                            tooltip="Logout"
+                            className="text-muted-foreground hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20"
+                        >
+                            <LogOut className="size-4" />
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>

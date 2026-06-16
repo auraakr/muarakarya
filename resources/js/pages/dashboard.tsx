@@ -45,7 +45,7 @@ export default function Dashboard({
     return (
         <>
             <Head title="Dashboard" />
-            <div className="space-y-6 p-1">
+            <div className="space-y-6 p-7">
 
                 {/* ── Header ── */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
