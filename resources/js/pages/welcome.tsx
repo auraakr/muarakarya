@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Head } from '@inertiajs/react';
-import React from 'react';
 import CompanyNavbar from '@/components/company-navbar';
 import CompanyFooter from '@/components/company-footer';
 
@@ -57,7 +56,7 @@ function StatItem({ value, suffix, label, sub, inView }: { value: number; suffix
     );
 }
 
-const serviceIcons: Record<string, React.JSX.Element> = {
+const serviceIcons: Record<string, React.ReactElement> = {
     blue: (
         <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -465,20 +464,23 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
 
                         {/* Schedule hours card */}
                         <div className="mt-px grid lg:grid-cols-2" style={{ backgroundColor: 'rgba(190,192,193,0.1)' }}>
-                            <div className="p-8 lg:p-10" style={{ backgroundColor: '#080808' }}>
-                                <img
-                                    src="/logo/faq.svg"
-                                    alt="Tim Muara Karya"
-                                    className="w-full h-48 lg:h-64 object-cover"
-                                    onError={(e) => {
-                                        const el = e.target as HTMLImageElement;
-                                        el.style.display = 'none';
-                                        const next = el.nextElementSibling as HTMLElement;
-                                        if (next) next.style.display = 'flex';
-                                    }}
-                                />
-                                <div className="hidden w-full h-48 lg:h-64 items-center justify-center" style={{ backgroundColor: 'rgba(19,91,151,0.1)' }}>
-                                    <span className="text-6xl font-black" style={{ color: 'rgba(19,91,151,0.3)' }}>MK</span>
+                            {/* Square image — never cropped */}
+                            <div className="overflow-hidden" style={{ backgroundColor: '#080808' }}>
+                                <div className="aspect-square w-full relative">
+                                    <img
+                                        src="/logo/faq.svg"
+                                        alt="Tim Muara Karya"
+                                        className="absolute inset-0 w-full h-full object-cover"
+                                        onError={(e) => {
+                                            const el = e.target as HTMLImageElement;
+                                            el.style.display = 'none';
+                                            const next = el.nextElementSibling as HTMLElement;
+                                            if (next) next.style.display = 'flex';
+                                        }}
+                                    />
+                                    <div className="hidden absolute inset-0 items-center justify-center" style={{ backgroundColor: 'rgba(19,91,151,0.1)' }}>
+                                        <span className="text-6xl font-black" style={{ color: 'rgba(19,91,151,0.3)' }}>MK</span>
+                                    </div>
                                 </div>
                             </div>
                             <div className="p-8 lg:p-10" style={{ backgroundColor: '#0d0d0d' }}>
@@ -523,6 +525,135 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                     </div>
                 </section>
 
+
+                {/* ══════════════════════════════════════════
+                    PROYEK UNGGULAN
+                ══════════════════════════════════════════ */}
+                <section id="proyek" className="py-20 lg:py-28" style={{ backgroundColor: '#f2f3f3' }}>
+                    <div className="max-w-7xl mx-auto px-4 lg:px-12">
+                        {/* Header */}
+                        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+                            <div>
+                                <div className="flex items-center gap-3 mb-4">
+                                    <div className="w-8 h-0.5" style={{ backgroundColor: '#135b97' }} />
+                                    <span className="text-xs font-bold uppercase tracking-[0.25em]" style={{ color: '#135b97' }}>// Proyek Kami //</span>
+                                </div>
+                                <h2 className="font-black leading-tight" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#080808' }}>
+                                    PROYEK UNGGULAN<br />
+                                    <span style={{ color: '#135b97' }}>YANG TELAH KAMI KERJAKAN</span>
+                                </h2>
+                            </div>
+                            <a
+                                href="/client"
+                                className="self-start lg:self-end inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold uppercase tracking-wider border transition-all"
+                                style={{ borderColor: '#135b97', color: '#135b97' }}
+                                onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'rgba(19,91,151,0.05)'; }}
+                                onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent'; }}
+                            >
+                                Semua Klien
+                                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 17L17 7M17 7H7M17 7v10" />
+                                </svg>
+                            </a>
+                        </div>
+
+                        {/* Project grid */}
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px" style={{ backgroundColor: '#bec0c1' }}>
+                            {[
+                                {
+                                    img: '/element3/1.svg',
+                                    title: 'Preventive Maintenance HVAC AHU Amazon KIC',
+                                    client: 'PT. Sumber Daya Sewatama',
+                                    tags: ['Preventive Maintenance', 'HVAC AHU'],
+                                },
+                                {
+                                    img: '/element3/10.svg',
+                                    title: 'Instalasi VRF 20 PK PT. Pertambangan Nusantara',
+                                    client: 'PT. Kangean Energy Indonesia',
+                                    tags: ['Instalasi VRF', 'Komersial'],
+                                },
+                                {
+                                    img: '/element3/5.svg',
+                                    title: 'Kontrak PM Air Conditioning Server Biznet',
+                                    client: 'Biznet',
+                                    tags: ['PM Server AC', 'Reaktive Maintenance'],
+                                },
+                                {
+                                    img: '/element3/2.svg',
+                                    title: 'PM MEP Equipment SHELL Station Gas Jabotabek',
+                                    client: 'CBRE / Sewatama',
+                                    tags: ['MEP Equipment', 'Jabotabek'],
+                                },
+                                {
+                                    img: '/element3/8.svg',
+                                    title: 'PM Air Conditioning Mini Market Jawa Barat',
+                                    client: 'Alfamidi (PT. Midi Utama Indonesia)',
+                                    tags: ['Preventive Maintenance', 'Retail'],
+                                },
+                                {
+                                    img: '/element3/3.svg',
+                                    title: 'PM Utility Equipment British Petroleum (AKR) Java',
+                                    client: 'AKR / Sewatama',
+                                    tags: ['Utility Equipment', 'Industrial'],
+                                },
+                            ].map((proj, i) => (
+                                <div
+                                    key={i}
+                                    className="group relative overflow-hidden cursor-default"
+                                    style={{ backgroundColor: '#f2f3f3' }}
+                                >
+                                    {/* Square image */}
+                                    <div className="aspect-square w-full relative overflow-hidden">
+                                        <img
+                                            src={proj.img}
+                                            alt={proj.title}
+                                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                            onError={(e) => {
+                                                const el = e.target as HTMLImageElement;
+                                                el.style.display = 'none';
+                                                const fb = el.nextElementSibling as HTMLElement;
+                                                if (fb) fb.style.display = 'flex';
+                                            }}
+                                        />
+                                        {/* Fallback placeholder */}
+                                        <div
+                                            className="hidden absolute inset-0 items-center justify-center flex-col gap-2"
+                                            style={{ backgroundColor: 'rgba(19,91,151,0.08)' }}
+                                        >
+                                            <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#bec0c1' }}>
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                            <span className="text-xs font-medium" style={{ color: '#bec0c1' }}>Foto segera hadir</span>
+                                        </div>
+                                        {/* Overlay gradient on hover */}
+                                        <div
+                                            className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+                                            style={{ background: 'linear-gradient(to top, rgba(8,8,8,0.7) 0%, transparent 60%)' }}
+                                        />
+                                    </div>
+
+                                    {/* Info */}
+                                    <div className="p-5 border-t" style={{ borderColor: '#bec0c1', backgroundColor: '#f2f3f3' }}>
+                                        <div className="flex flex-wrap gap-1.5 mb-3">
+                                            {proj.tags.map((tag) => (
+                                                <span
+                                                    key={tag}
+                                                    className="text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider"
+                                                    style={{ backgroundColor: 'rgba(19,91,151,0.08)', color: '#135b97', border: '1px solid rgba(19,91,151,0.15)' }}
+                                                >
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </div>
+                                        <h3 className="text-sm font-black leading-snug mb-1" style={{ color: '#080808' }}>{proj.title}</h3>
+                                        <p className="text-xs" style={{ color: '#5e7d9a' }}>{proj.client}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
                 {/* ══════════════════════════════════════════
                     FAQ
                 ══════════════════════════════════════════ */}
@@ -547,7 +678,7 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                                 <div className="relative overflow-hidden p-6 lg:p-8" style={{ backgroundColor: '#135b97' }}>
                                     <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10 -translate-y-1/2 translate-x-1/2" style={{ backgroundColor: '#f2f3f3' }} />
                                     <img
-                                        src="/logo/faq.svg"
+                                        src="/elementpanjang/6.svg"
                                         alt=""
                                         className="absolute inset-0 w-full h-full object-cover opacity-10 mix-blend-luminosity"
                                         onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
