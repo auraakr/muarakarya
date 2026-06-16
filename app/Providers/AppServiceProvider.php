@@ -26,8 +26,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->configureDefaults();
 
-        if (env('APP_ENV') === 'production') {
-            URL::forceScheme('https');
+        if (app()->environment('production')) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
         }
     }
 
