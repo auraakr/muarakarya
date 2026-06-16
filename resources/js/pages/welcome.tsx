@@ -108,7 +108,7 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                     {/* Background image with overlay */}
                     <div className="absolute inset-0">
                         <img
-                            src="/logo/hero-bg.jpg"
+                            src="/elementpanjang/8.svg"
                             alt=""
                             className="w-full h-full object-cover opacity-30"
                             onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
@@ -214,12 +214,34 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                                 </div>
                                 {/* Partner badges */}
                                 <div className="p-5 border" style={{ borderColor: 'rgba(190,192,193,0.15)', backgroundColor: 'rgba(242,243,243,0.04)' }}>
-                                    <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: '#135b97' }}>Auto Service Dealer</div>
-                                    <div className="flex flex-wrap gap-2">
-                                        {['Daikin', 'Panasonic', 'Toshiba', 'Gree', 'Carrier', 'Bitzer'].map((b) => (
-                                            <span key={b} className="text-xs px-3 py-1 font-semibold border" style={{ borderColor: 'rgba(190,192,193,0.2)', color: '#f2f3f3' }}>
-                                                {b}
-                                            </span>
+                                    <div className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: '#135b97' }}>Auto Service Dealer</div>
+                                    <div className="flex flex-wrap gap-3">
+                                        {[
+                                            { name: 'Daikin', img: '/mitra/resmi/daikin.svg' },
+                                            { name: 'Panasonic', img: '/mitra/resmi/panasonic.svg' },
+                                            { name: 'Toshiba', img: '/mitra/resmi/toshiba.svg' },
+                                            { name: 'Gree', img: '/mitra/resmi/gree.svg' },
+                                            { name: 'Carrier', img: '/mitra/resmi/carrier.svg' },
+                                            { name: 'Bitzer', img: '/mitra/resmi/bitzer.svg' }
+                                        ].map((brand) => (
+                                            <div 
+                                                key={brand.name} 
+                                                className="w-20 h-10 px-2 py-1 flex items-center justify-center border rounded bg-white/5 transition-colors hover:bg-white/10" 
+                                                style={{ borderColor: 'rgba(190,192,193,0.2)' }}
+                                            >
+                                                <img 
+                                                    src={brand.img} 
+                                                    alt={brand.name} 
+                                                    className="max-w-full max-h-full object-contain"
+                                                    onError={(e) => {
+                                                        // Jika gambar gagal dimuat, tampilkan namanya saja
+                                                        (e.target as HTMLImageElement).style.display = 'none';
+                                                        const span = (e.target as HTMLImageElement).nextElementSibling as HTMLElement;
+                                                        if (span) span.style.display = 'block';
+                                                    }}
+                                                />
+                                                <span className="hidden text-[10px] font-bold text-[#f2f3f3] text-center">{brand.name}</span>
+                                            </div>
                                         ))}
                                     </div>
                                 </div>
@@ -239,7 +261,7 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
 
                     {/* Wave divider */}
                     <div className="absolute bottom-0 left-0 right-0 overflow-hidden leading-none">
-                        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+                        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block" style={{ transform: 'translateY(2px)' }}>
                             <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#f2f3f3"/>
                         </svg>
                     </div>
@@ -390,10 +412,10 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                 {/* ══════════════════════════════════════════
                     LAYANAN
                 ══════════════════════════════════════════ */}
-                <section id="layanan" className="py-20 lg:py-28" style={{ backgroundColor: '#080808' }}>
+                <section id="layanan" className="relative pt-32 pb-28" style={{ backgroundColor: '#080808' }}>
                     {/* Top wave */}
-                    <div className="-mt-20 overflow-hidden leading-none">
-                        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+                    <div className="absolute top-0 left-0 right-0 overflow-hidden leading-none">
+                        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block" style={{ transform: 'translateY(-2px)' }}>
                             <path d="M0,40 C360,0 1080,80 1440,40 L1440,0 L0,0 Z" fill="#f2f3f3"/>
                         </svg>
                     </div>
@@ -518,8 +540,8 @@ export default function Welcome({ faqs = [], services = [] }: { faqs: Faq[]; ser
                     </div>
 
                     {/* Bottom wave */}
-                    <div className="overflow-hidden leading-none mt-20">
-                        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+                    <div className="absolute bottom-0 left-0 right-0 overflow-hidden leading-none">
+                        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block" style={{ transform: 'translateY(2px)' }}>
                             <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#f2f3f3"/>
                         </svg>
                     </div>
