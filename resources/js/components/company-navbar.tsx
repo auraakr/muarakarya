@@ -10,6 +10,7 @@ const navLinks = [
 export default function CompanyNavbar() {
     const { auth } = usePage().props as any;
     const currentPath = usePage().url.split('?')[0];
+    const isAdmin = auth?.user?.role === 'admin';
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -89,6 +90,21 @@ export default function CompanyNavbar() {
                                 </Link>
                             );
                         })}
+                        {isAdmin && (
+                            <Link
+                                href="/dashboard"
+                                className={`relative px-3 py-1.5 text-sm font-medium transition-colors ${
+                                    currentPath.startsWith('/dashboard') || currentPath.startsWith('/admin')
+                                        ? 'text-[#135b97]'
+                                        : 'text-[#bec0c1] hover:text-[#f2f3f3]'
+                                }`}
+                            >
+                                Dashboard
+                                {(currentPath.startsWith('/dashboard') || currentPath.startsWith('/admin')) && (
+                                    <span className="absolute bottom-0 left-3 right-3 h-0.5" style={{ backgroundColor: '#135b97' }} />
+                                )}
+                            </Link>
+                        )}
                     </div>
 
                     {/* Desktop CTA */}
@@ -194,6 +210,31 @@ export default function CompanyNavbar() {
                                     </Link>
                                 );
                             })}
+                            {isAdmin && (
+                                <Link
+                                    href="/dashboard"
+                                    onClick={() => setMenuOpen(false)}
+                                >
+                                    <div
+                                        className="flex items-center justify-between py-5 transition-all"
+                                        style={{
+                                            transitionDelay: menuOpen ? `${navLinks.length * 50}ms` : '0ms',
+                                            transform: menuOpen ? 'translateX(0)' : 'translateX(-16px)',
+                                            opacity: menuOpen ? 1 : 0,
+                                        }}
+                                    >
+                                        <span
+                                            className="text-2xl font-black uppercase tracking-wide"
+                                            style={{ color: currentPath.startsWith('/dashboard') || currentPath.startsWith('/admin') ? '#135b97' : '#f2f3f3' }}
+                                        >
+                                            Dashboard
+                                        </span>
+                                        {(currentPath.startsWith('/dashboard') || currentPath.startsWith('/admin')) && (
+                                            <div className="w-2 h-2" style={{ backgroundColor: '#135b97' }} />
+                                        )}
+                                    </div>
+                                </Link>
+                            )}
                         </div>
                     </div>
 

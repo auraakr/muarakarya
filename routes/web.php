@@ -2,27 +2,27 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Middleware\AdminMiddleware;
-use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', WelcomeController::class)->name('home');
 Route::inertia('/client', 'client')->name('client');
 Route::inertia('/karir', 'careers')->name('careers');
 
 Route::middleware(['auth', 'verified', AdminMiddleware::class])->group(function () {
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
+    Route::get('dashboard', DashboardController::class)->name('dashboard');
 
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('faqs', FaqController::class)->except(['show']);
         Route::resource('services', ServiceController::class)->except(['show']);
     });
-});
 
-Route::get('/bersih', function() {
-    \Illuminate\Support\Facades\Artisan::call('optimize:clear');
-    return 'Memori berhasil dibersihkan! Silakan kembali ke halaman utama.';
+    Route::get('/bersih', function () {
+        \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+        return 'Cache berhasil dibersihkan!';
+    });
 });
 
 require __DIR__.'/settings.php';
