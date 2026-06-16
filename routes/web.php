@@ -5,6 +5,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Middleware\AdminMiddleware;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', WelcomeController::class)->name('home');
 Route::inertia('/client', 'client')->name('client');
@@ -17,6 +18,11 @@ Route::middleware(['auth', 'verified', AdminMiddleware::class])->group(function 
         Route::resource('faqs', FaqController::class)->except(['show']);
         Route::resource('services', ServiceController::class)->except(['show']);
     });
+});
+
+Route::get('/bersih', function() {
+    Artisan::call('optimize:clear');
+    return 'Memori berhasil dibersihkan! Silakan kembali ke halaman utama.';
 });
 
 require __DIR__.'/settings.php';
