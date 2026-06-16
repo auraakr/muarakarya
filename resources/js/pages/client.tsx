@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Head, usePage } from '@inertiajs/react';
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import CompanyNavbar from '@/components/company-navbar';
 import CompanyFooter from '@/components/company-footer';
+
+function useInView(threshold = 0.15) {
+    const ref = useRef<HTMLDivElement>(null);
+    const [inView, setInView] = useState(false);
+    useEffect(() => {
+        const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setInView(true); }, { threshold });
+        if (ref.current) obs.observe(ref.current);
+        return () => obs.disconnect();
+    }, [threshold]);
+    return { ref, inView };
+}
 
 const clientLogos = [
     { name: 'The Trans Luxury Hotel', src: '/mitra/client/thetrans.svg' },
@@ -20,7 +30,7 @@ const clientLogos = [
     { name: 'AKR (British Petroleum Java)', src: '/mitra/client/akr.svg' },
     { name: 'Biznet', src: '/mitra/client/biznet.svg' },
     { name: 'PT. Sumber Daya Sewatama', src: '/mitra/client/sewatama.svg' },
-    { name: 'Alfamidi (PT. Midi Utama Indonesia)', src: '/mitra/client/alfamidi.svg' },
+    { name: 'Alfamidi', src: '/mitra/client/alfamidi.svg' },
     { name: 'PT. Pertambangan Nusantara', src: '/mitra/client/ptpn.svg' },
 ];
 
@@ -33,169 +43,396 @@ const partnerLogos = [
     { name: 'Bitzer', src: '/mitra/resmi/bitzer.svg' },
 ];
 
+const projects = [
+    {
+        client: 'PT. Sumber Daya Sewatama (CBRE)',
+        items: [
+            'Preventive Maintenance Utility Equipment British Petroleum (AKR) Java',
+            'Preventive Maintenance Air Conditioning Standart Charter Bank Java',
+            'Preventive Maintenance MEP Equipment SHELL Station Gas Jabotabek',
+            'Instalasi HVAC AHU Amazon KIC',
+        ],
+    },
+    {
+        client: 'Biznet',
+        items: [
+            'Kontrak Preventive Maintenance Air Conditioning Server',
+            'Repair & Instalasi Unit Baru, Relokasi',
+            'Reaktive Maintenance',
+        ],
+    },
+    {
+        client: 'Alfamidi (PT. Midi Utama Indonesia)',
+        items: [
+            'Kontrak Preventive Maintenance Air Conditioning Mini Market Jawa Barat',
+            'Repair & Instalasi Unit, Relokasi',
+            'Reaktive Maintenance',
+        ],
+    },
+    {
+        client: 'PT. Pertambangan Nusantara',
+        items: [
+            'Pengadaan Unit VRF 20 PK',
+            'Instalasi & Pemasangan Unit VRF PT. Kangean Energy Indonesia',
+            'Kontrak Preventive Maintenance VRF Server PT. Kangean Energy Indonesia, Kuningan Jakarta',
+        ],
+    },
+];
+
 export default function ClientsAndPartners() {
-    const { auth } = usePage().props;
+    const { ref: heroRef, inView: heroIn } = useInView(0.1);
+    const { ref: clientRef, inView: clientIn } = useInView(0.1);
+    const { ref: partnerRef, inView: partnerIn } = useInView(0.1);
+    const { ref: projectRef, inView: projectIn } = useInView(0.1);
+    const [activeProject, setActiveProject] = useState(0);
 
     return (
         <>
             <Head title="Klien & Mitra — CV. Muara Karya" />
-
-            <div className="min-h-screen bg-slate-50 text-gray-800 scroll-smooth">
-
+            <div className="min-h-screen scroll-smooth" style={{ backgroundColor: '#f2f3f3', color: '#080808' }}>
                 <CompanyNavbar />
 
-                <main className="flex flex-col gap-8 p-4 lg:p-8 pt-24 max-w-7xl mx-auto w-full">
-
-                    {/* Header Section */}
-                    <div className="text-center max-w-3xl mx-auto mb-2">
-                        <span className="inline-block bg-blue-50 text-blue-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
-                            Jaringan Kami
-                        </span>
-                        <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                            Klien & Mitra Resmi
-                        </h1>
-                        <p className="text-gray-500">
-                            CV. Muara Karya dipercaya oleh berbagai institusi dan bermitra dengan produsen HVAC terkemuka.
-                        </p>
+                {/* ══════════════════════════════════════════
+                    HERO
+                ══════════════════════════════════════════ */}
+                <section
+                    className="relative pt-16 pb-0 overflow-hidden"
+                    style={{ backgroundColor: '#080808', minHeight: '340px' }}
+                    ref={heroRef}
+                >
+                    <div className="absolute inset-0 pointer-events-none">
+                        <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-10 blur-3xl" style={{ backgroundColor: '#135b97', transform: 'translate(30%, -30%)' }} />
+                        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-5 blur-3xl" style={{ backgroundColor: '#135b97', transform: 'translate(-30%, 30%)' }} />
+                        {/* dot grid */}
+                        <div className="absolute inset-0 opacity-5" style={{
+                            backgroundImage: 'radial-gradient(circle, rgba(242,243,243,0.4) 1px, transparent 1px)',
+                            backgroundSize: '28px 28px',
+                        }} />
                     </div>
 
-                    <div className="grid gap-8 md:grid-cols-3 w-full">
-
-                        {/* Kepercayaan Klien Kami */}
-                        <div className="bg-white rounded-3xl p-8 shadow-xl border border-slate-200">
-                            <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-                                <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-                                    <svg className="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                    </svg>
-                                </div>
-                                Kepercayaan Klien
-                            </h2>
-                            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3">
-                                {clientLogos.map((c) => (
-                                    <div
-                                        key={c.name}
-                                        className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-slate-50 p-4 text-center transition-all duration-300 hover:scale-105 hover:bg-blue-50 hover:shadow-sm border border-transparent hover:border-blue-100 group"
-                                    >
-                                        <img
-                                            src={c.src}
-                                            alt={c.name}
-                                            className="h-10 w-auto object-contain filter grayscale transition duration-300 group-hover:grayscale-0"
-                                        />
-                                        <span className="mt-2 text-[11px] font-medium text-slate-500 leading-tight group-hover:text-blue-700">{c.name}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Mitra Resmi & Dukungan Teknologi */}
-                        <div className="bg-white rounded-3xl p-8 shadow-xl border border-slate-200 md:col-span-2">
-                            <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-                                <div className="w-10 h-10 bg-cyan-100 rounded-xl flex items-center justify-center">
-                                    <svg className="w-5 h-5 text-cyan-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                                    </svg>
-                                </div>
-                                Mitra Resmi & Dukungan Teknologi
-                            </h2>
-                            <div className="flex flex-wrap gap-4">
-                                {partnerLogos.map((p) => (
-                                    <div
-                                        key={p.name}
-                                        className="flex h-24 w-40 items-center justify-center rounded-2xl bg-slate-50 p-4 border border-slate-200 transition-all duration-300 hover:scale-105 hover:shadow-md hover:border-cyan-200 hover:bg-white group"
-                                    >
-                                        <img
-                                            src={p.src}
-                                            alt={p.name}
-                                            className="h-12 w-auto object-contain filter grayscale transition duration-300 group-hover:grayscale-0"
-                                        />
-                                    </div>
-                                ))}
-                            </div>
-
-                            {/* Proyek Unggulan per Klien */}
-                            <div className="mt-8 border-t border-slate-100 pt-6">
-                                <h3 className="text-sm font-semibold text-gray-700 mb-4">Proyek Unggulan</h3>
-                                <div className="space-y-3">
-                                    {[
-                                        {
-                                            client: 'PT. Sumber Daya Sewatama (CBRE)',
-                                            items: [
-                                                'Preventive Maintenance Utility Equipment British Petroleum (AKR) Java',
-                                                'Preventive Maintenance Air Conditioning Standart Charter Bank Java',
-                                                'Preventive Maintenance MEP Equipment SHELL Station Gas Jabotabek',
-                                                'Instalasi HVAC AHU Amazon KIC',
-                                            ],
-                                        },
-                                        {
-                                            client: 'Biznet',
-                                            items: [
-                                                'Kontrak Preventive Maintenance Air Conditioning Server',
-                                                'Repair & Instalasi Unit Baru, Relokasi',
-                                                'Reaktive Maintenance',
-                                            ],
-                                        },
-                                        {
-                                            client: 'Alfamidi (PT. Midi Utama Indonesia)',
-                                            items: [
-                                                'Kontrak Preventive Maintenance Air Conditioning Mini Market Jawa Barat',
-                                                'Repair & Instalasi Unit, Relokasi',
-                                                'Reaktive Maintenance',
-                                            ],
-                                        },
-                                        {
-                                            client: 'PT. Pertambangan Nusantara',
-                                            items: [
-                                                'Pengadaan Unit VRF 20 PK',
-                                                'Instalasi & Pemasangan Unit VRF PT. Kangean Energy Indonesia',
-                                                'Kontrak Preventive Maintenance VRF Server PT. Kangean Energy Indonesia, Kuningan Jakarta',
-                                            ],
-                                        },
-                                    ].map((proj) => (
-                                        <div key={proj.client} className="bg-slate-50 rounded-xl p-4 border border-slate-100">
-                                            <div className="text-xs font-bold text-blue-700 mb-2">{proj.client}</div>
-                                            <ul className="space-y-1">
-                                                {proj.items.map((item) => (
-                                                    <li key={item} className="flex items-start gap-2 text-xs text-gray-600">
-                                                        <svg className="w-3.5 h-3.5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                                                        </svg>
-                                                        {item}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Banner Informasi */}
-                    <div className="w-full mt-4 mb-12">
-                        <div className="relative overflow-hidden rounded-3xl border border-slate-800 p-8 lg:p-12 bg-gradient-to-br from-blue-900 via-slate-800 to-slate-900 shadow-xl">
-
-                            {/* Decorative Blobs */}
-                            <div className="absolute top-0 left-0 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-                            <div className="absolute bottom-0 right-0 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3" />
-
-                            <PlaceholderPattern className="absolute inset-0 size-full stroke-white/5" />
-
-                            <div className="relative z-10 max-w-3xl">
-                                <span className="inline-block bg-white/10 text-blue-200 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 backdrop-blur-sm border border-white/10">
-                                    Dukungan Teknis
+                    <div className="relative max-w-7xl mx-auto px-4 lg:px-12 pt-16 pb-20">
+                        <div
+                            className="transition-all duration-700"
+                            style={{ opacity: heroIn ? 1 : 0, transform: heroIn ? 'translateY(0)' : 'translateY(24px)' }}
+                        >
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="w-8 h-0.5" style={{ backgroundColor: '#135b97' }} />
+                                <span className="text-xs font-bold uppercase tracking-[0.25em]" style={{ color: '#135b97' }}>
+                                    // Jaringan Kami //
                                 </span>
-                                <h3 className="text-2xl lg:text-3xl font-bold mb-4 text-white">Layanan Purna Jual Terpercaya</h3>
-                                <p className="max-w-prose text-base lg:text-lg text-slate-300 leading-relaxed">
-                                    Kami melayani berbagai proyek HVAC & Refrigerasi untuk klien korporat dan institusi. Sebagai
-                                    Auto Service Dealer dari beberapa merek ternama Gree, Daikin, Toshiba, Panasonic, Carrier,
-                                    dan Bitzer, kami menyediakan layanan purna jual dan dukungan teknis yang dapat diandalkan
-                                    untuk memastikan efisiensi kerja mesin tetap stabil dan tahan lama.
-                                </p>
+                            </div>
+                            <h1 className="font-black leading-tight mb-4" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: '#f2f3f3' }}>
+                                KLIEN &{' '}
+                                <span style={{ color: '#135b97' }}>MITRA RESMI</span>
+                            </h1>
+                            <p className="text-base max-w-xl" style={{ color: '#bec0c1' }}>
+                                CV. Muara Karya dipercaya oleh berbagai institusi terkemuka dan bermitra
+                                dengan produsen HVAC kelas dunia sejak 2014.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Wave */}
+                    <div className="overflow-hidden leading-none">
+                        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block">
+                            <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#f2f3f3"/>
+                        </svg>
+                    </div>
+                </section>
+
+                {/* ══════════════════════════════════════════
+                    KLIEN GRID
+                ══════════════════════════════════════════ */}
+                <section className="py-16 lg:py-24" style={{ backgroundColor: '#f2f3f3' }} ref={clientRef}>
+                    <div className="max-w-7xl mx-auto px-4 lg:px-12">
+
+                        <div className="flex items-center gap-3 mb-3">
+                            <div className="w-8 h-0.5" style={{ backgroundColor: '#135b97' }} />
+                            <span className="text-xs font-bold uppercase tracking-[0.25em]" style={{ color: '#135b97' }}>// Klien Kami //</span>
+                        </div>
+                        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 gap-4">
+                            <h2 className="font-black leading-tight" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', color: '#080808' }}>
+                                DIPERCAYA OLEH<br />PERUSAHAAN TERKEMUKA
+                            </h2>
+                            <p className="text-sm max-w-sm" style={{ color: '#5e7d9a' }}>
+                                17 klien korporat & institusi dari berbagai sektor industri di Indonesia.
+                            </p>
+                        </div>
+
+                        {/* Client logo grid */}
+                        <div
+                            className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-px"
+                            style={{ backgroundColor: '#bec0c1', transition: 'opacity 0.7s', opacity: clientIn ? 1 : 0 }}
+                        >
+                            {clientLogos.map((c, i) => (
+                                <div
+                                    key={c.name}
+                                    className="group flex flex-col items-center justify-center gap-2 p-5 transition-all duration-300 cursor-default"
+                                    style={{
+                                        backgroundColor: '#f2f3f3',
+                                        transitionDelay: `${i * 30}ms`,
+                                    }}
+                                    onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.backgroundColor = '#fff'; }}
+                                    onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.backgroundColor = '#f2f3f3'; }}
+                                >
+                                    <img
+                                        src={c.src}
+                                        alt={c.name}
+                                        className="h-8 w-auto object-contain transition-all duration-300"
+                                        style={{ filter: 'grayscale(100%) opacity(50%)' }}
+                                        onMouseEnter={(e) => { (e.target as HTMLImageElement).style.filter = 'grayscale(0%) opacity(100%)'; }}
+                                        onMouseLeave={(e) => { (e.target as HTMLImageElement).style.filter = 'grayscale(100%) opacity(50%)'; }}
+                                        onError={(e) => {
+                                            const el = e.target as HTMLImageElement;
+                                            el.style.display = 'none';
+                                            const fb = el.nextElementSibling as HTMLElement;
+                                            if (fb) fb.style.display = 'flex';
+                                        }}
+                                    />
+                                    {/* Fallback */}
+                                    <div
+                                        className="h-8 w-full items-center justify-center text-xs font-black"
+                                        style={{ display: 'none', color: '#bec0c1' }}
+                                    >
+                                        {c.name.slice(0, 4).toUpperCase()}
+                                    </div>
+                                    <span className="text-[10px] font-medium text-center leading-tight transition-colors duration-300"
+                                        style={{ color: '#5e7d9a' }}>
+                                        {c.name}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* ══════════════════════════════════════════
+                    PARTNER BRANDS — dark section
+                ══════════════════════════════════════════ */}
+                <section className="py-16 lg:py-24 overflow-hidden" style={{ backgroundColor: '#080808' }} ref={partnerRef}>
+                    {/* top wave */}
+                    <div className="-mt-24 overflow-hidden leading-none">
+                        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block">
+                            <path d="M0,30 C360,0 1080,60 1440,30 L1440,0 L0,0 Z" fill="#f2f3f3"/>
+                        </svg>
+                    </div>
+
+                    <div className="max-w-7xl mx-auto px-4 lg:px-12 pt-8">
+                        <div className="flex items-center gap-3 mb-3">
+                            <div className="w-8 h-0.5" style={{ backgroundColor: '#135b97' }} />
+                            <span className="text-xs font-bold uppercase tracking-[0.25em]" style={{ color: '#135b97' }}>// Mitra Resmi //</span>
+                        </div>
+                        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-4">
+                            <h2 className="font-black leading-tight" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', color: '#f2f3f3' }}>
+                                AUTO SERVICE DEALER<br />
+                                <span style={{ color: '#135b97' }}>BRAND TERKEMUKA</span>
+                            </h2>
+                            <p className="text-sm max-w-sm" style={{ color: '#5e7d9a' }}>
+                                Kami mengikuti perkembangan teknologi setiap brand dan bekerja sama dalam Kontrak Aftersales.
+                            </p>
+                        </div>
+
+                        <div
+                            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-px"
+                            style={{
+                                backgroundColor: 'rgba(190,192,193,0.1)',
+                                opacity: partnerIn ? 1 : 0,
+                                transition: 'opacity 0.7s',
+                            }}
+                        >
+                            {partnerLogos.map((p, i) => (
+                                <div
+                                    key={p.name}
+                                    className="flex flex-col items-center justify-center gap-3 p-8 transition-all duration-300 cursor-default group"
+                                    style={{
+                                        backgroundColor: '#080808',
+                                        transitionDelay: `${i * 60}ms`,
+                                    }}
+                                    onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.backgroundColor = 'rgba(19,91,151,0.08)'; }}
+                                    onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.backgroundColor = '#080808'; }}
+                                >
+                                    <img
+                                        src={p.src}
+                                        alt={p.name}
+                                        className="h-10 w-auto object-contain transition-all duration-300"
+                                        style={{ filter: 'grayscale(100%) brightness(0.5)' }}
+                                        onMouseEnter={(e) => { (e.target as HTMLImageElement).style.filter = 'grayscale(0%) brightness(1)'; }}
+                                        onMouseLeave={(e) => { (e.target as HTMLImageElement).style.filter = 'grayscale(100%) brightness(0.5)'; }}
+                                        onError={(e) => {
+                                            const el = e.target as HTMLImageElement;
+                                            el.style.display = 'none';
+                                            const fb = el.nextElementSibling as HTMLElement;
+                                            if (fb) fb.style.display = 'flex';
+                                        }}
+                                    />
+                                    {/* Fallback */}
+                                    <div
+                                        className="h-10 w-full items-center justify-center text-lg font-black"
+                                        style={{ display: 'none', color: '#5e7d9a' }}
+                                    >
+                                        {p.name}
+                                    </div>
+                                    <span className="text-xs font-bold uppercase tracking-widest transition-colors duration-300" style={{ color: '#5e7d9a' }}>
+                                        {p.name}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Keterangan partner */}
+                        <div className="mt-px grid grid-cols-1 lg:grid-cols-3 gap-px" style={{ backgroundColor: 'rgba(190,192,193,0.1)' }}>
+                            {[
+                                { icon: '🔧', title: 'Kualitas Mutu', desc: 'Menjaga efisiensi kinerja mesin pendingin agar tetap stabil dan tahan lama.' },
+                                { icon: '📊', title: 'Analisa Actual', desc: 'Target analisa yang mengadopsi pencarian penyebab kerusakan atau sumber masalah.' },
+                                { icon: '🛡️', title: 'Terdaftar HSSE', desc: 'Safety terdaftar HSSE — standar keselamatan kerja internasional.' },
+                            ].map((item) => (
+                                <div key={item.title} className="p-7 transition-all" style={{ backgroundColor: '#080808' }}>
+                                    <div className="text-2xl mb-3">{item.icon}</div>
+                                    <div className="text-sm font-black mb-2" style={{ color: '#f2f3f3' }}>{item.title}</div>
+                                    <div className="text-xs leading-relaxed" style={{ color: '#5e7d9a' }}>{item.desc}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* bottom wave */}
+                    <div className="overflow-hidden leading-none mt-16">
+                        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block">
+                            <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#f2f3f3"/>
+                        </svg>
+                    </div>
+                </section>
+
+                {/* ══════════════════════════════════════════
+                    PROYEK UNGGULAN — tab layout
+                ══════════════════════════════════════════ */}
+                <section className="py-16 lg:py-24" style={{ backgroundColor: '#f2f3f3' }} ref={projectRef}>
+                    <div className="max-w-7xl mx-auto px-4 lg:px-12">
+
+                        <div className="flex items-center gap-3 mb-3">
+                            <div className="w-8 h-0.5" style={{ backgroundColor: '#135b97' }} />
+                            <span className="text-xs font-bold uppercase tracking-[0.25em]" style={{ color: '#135b97' }}>// Proyek Unggulan //</span>
+                        </div>
+                        <h2 className="font-black leading-tight mb-10" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', color: '#080808' }}>
+                            PORTOFOLIO<br />PEKERJAAN KAMI
+                        </h2>
+
+                        <div
+                            className="grid lg:grid-cols-3 gap-px"
+                            style={{
+                                backgroundColor: '#bec0c1',
+                                opacity: projectIn ? 1 : 0,
+                                transition: 'opacity 0.7s',
+                            }}
+                        >
+                            {/* Tab list */}
+                            <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-visible" style={{ backgroundColor: '#080808' }}>
+                                {projects.map((proj, i) => (
+                                    <button
+                                        key={proj.client}
+                                        onClick={() => setActiveProject(i)}
+                                        className="flex-shrink-0 lg:flex-shrink text-left px-6 py-5 border-b transition-all"
+                                        style={{
+                                            borderColor: 'rgba(190,192,193,0.1)',
+                                            backgroundColor: activeProject === i ? 'rgba(19,91,151,0.12)' : 'transparent',
+                                            borderLeft: activeProject === i ? '3px solid #135b97' : '3px solid transparent',
+                                        }}
+                                    >
+                                        <div className="text-xs font-black uppercase tracking-wide" style={{ color: activeProject === i ? '#135b97' : '#5e7d9a' }}>
+                                            {`0${i + 1}`}
+                                        </div>
+                                        <div className="text-sm font-semibold mt-1 leading-snug" style={{ color: activeProject === i ? '#f2f3f3' : '#bec0c1' }}>
+                                            {proj.client}
+                                        </div>
+                                    </button>
+                                ))}
+                            </div>
+
+                            {/* Detail panel */}
+                            <div className="lg:col-span-2 p-8 lg:p-10" style={{ backgroundColor: '#f2f3f3' }}>
+                                <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: '#135b97' }}>
+                                    {`0${activeProject + 1} — ${projects[activeProject].client}`}
+                                </div>
+                                <h3 className="text-lg font-black mb-6" style={{ color: '#080808' }}>Lingkup Pekerjaan</h3>
+                                <ul className="space-y-4">
+                                    {projects[activeProject].items.map((item, i) => (
+                                        <li
+                                            key={item}
+                                            className="flex items-start gap-4"
+                                            style={{
+                                                opacity: projectIn ? 1 : 0,
+                                                transition: `opacity 0.4s ${i * 80}ms`,
+                                            }}
+                                        >
+                                            <div
+                                                className="flex-shrink-0 w-7 h-7 flex items-center justify-center text-xs font-black mt-0.5"
+                                                style={{ backgroundColor: '#135b97', color: '#f2f3f3' }}
+                                            >
+                                                {i + 1}
+                                            </div>
+                                            <p className="text-sm leading-relaxed pt-1" style={{ color: '#5e7d9a' }}>{item}</p>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
                         </div>
                     </div>
-                </main>
+                </section>
+
+                {/* ══════════════════════════════════════════
+                    BANNER BAWAH
+                ══════════════════════════════════════════ */}
+                <section className="pb-16 lg:pb-24" style={{ backgroundColor: '#f2f3f3' }}>
+                    <div className="max-w-7xl mx-auto px-4 lg:px-12">
+                        <div
+                            className="relative overflow-hidden p-10 lg:p-14"
+                            style={{ backgroundColor: '#135b97' }}
+                        >
+                            {/* bg accent */}
+                            <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10 -translate-y-1/2 translate-x-1/2" style={{ backgroundColor: '#f2f3f3' }} />
+                            <div className="absolute bottom-0 left-1/3 w-48 h-48 rounded-full opacity-5" style={{ backgroundColor: '#080808' }} />
+
+                            <div className="relative flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+                                <div>
+                                    <div className="flex items-center gap-3 mb-3">
+                                        <div className="w-6 h-0.5" style={{ backgroundColor: 'rgba(242,243,243,0.4)' }} />
+                                        <span className="text-xs font-bold uppercase tracking-widest" style={{ color: 'rgba(242,243,243,0.7)' }}>Dukungan Teknis</span>
+                                    </div>
+                                    <h3 className="font-black leading-tight mb-3" style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)', color: '#f2f3f3' }}>
+                                        LAYANAN PURNA JUAL<br />TERPERCAYA
+                                    </h3>
+                                    <p className="text-sm leading-relaxed max-w-xl" style={{ color: 'rgba(242,243,243,0.75)' }}>
+                                        Sebagai Auto Service Dealer Gree, Daikin, Toshiba, Panasonic, Carrier, dan Bitzer —
+                                        kami menyediakan layanan purna jual dan dukungan teknis yang dapat diandalkan
+                                        untuk memastikan efisiensi kerja mesin tetap stabil dan tahan lama.
+                                    </p>
+                                </div>
+                                <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+                                    <a
+                                        href="https://wa.me/6287778440548"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-bold uppercase tracking-wider transition-all hover:opacity-90"
+                                        style={{ backgroundColor: '#f2f3f3', color: '#135b97' }}
+                                    >
+                                        Hubungi Kami
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 17L17 7M17 7H7M17 7v10" />
+                                        </svg>
+                                    </a>
+                                    <a
+                                        href="mailto:Muara.karya@gmail.com"
+                                        className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-bold uppercase tracking-wider border transition-all hover:bg-white/10"
+                                        style={{ borderColor: 'rgba(242,243,243,0.3)', color: '#f2f3f3' }}
+                                    >
+                                        Email Kami
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <CompanyFooter />
             </div>
         </>
