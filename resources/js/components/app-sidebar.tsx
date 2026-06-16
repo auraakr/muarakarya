@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, ChevronRight, FolderGit2, HelpCircle, LayoutGrid, Wrench } from 'lucide-react';
+import { BookOpen, Briefcase, ChevronRight, FolderGit2, HelpCircle, LayoutGrid, Wrench } from 'lucide-react';
 import type { ReactNode } from 'react';
 
 import AppLogo from '@/components/app-logo';
@@ -29,6 +29,7 @@ const mainNavItems: NavEntry[] = [
     { title: 'Dashboard', href: dashboard(), icon: LayoutGrid },
     { title: 'FAQ',       href: '/admin/faqs',     icon: HelpCircle },
     { title: 'Layanan',   href: '/admin/services', icon: Wrench },
+    { title: 'Karir',     href: '/admin/careers',  icon: Briefcase },
 ];
 
 const generalNavItems: NavEntry[] = [
