@@ -21,7 +21,7 @@ Route::middleware(['auth', 'verified', AdminMiddleware::class])->group(function 
 });
 
 Route::get('/bersih', function() {
-    Artisan::call('optimize:clear');
+    \Illuminate\Support\Facades\Artisan::call('optimize:clear');
     return 'Memori berhasil dibersihkan! Silakan kembali ke halaman utama.';
 });
 
