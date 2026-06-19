@@ -110,7 +110,7 @@ export default function CompanyNavbar() {
                     {/* Desktop CTA */}
                     <div className="hidden md:flex items-center gap-3">
                         <a
-                            href="tel:+6287778440548"
+                            href="tel:+6281221107273"
                             className="flex items-center gap-2 text-sm font-bold transition-colors"
                             style={{ color: '#bec0c1' }}
                             onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#f2f3f3'; }}
@@ -119,10 +119,10 @@ export default function CompanyNavbar() {
                             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                             </svg>
-                            +62 877-7844-0548
+                            +62 812-2110-7273
                         </a>
                         <a
-                            href="https://wa.me/6287778440548"
+                            href="https://wa.me/6281221107273"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all hover:opacity-90"
@@ -248,7 +248,7 @@ export default function CompanyNavbar() {
                         }}
                     >
                         <a
-                            href="tel:+6287778440548"
+                            href="tel:+6281221107273"
                             className="flex items-center gap-3 text-sm font-medium"
                             style={{ color: '#bec0c1' }}
                             onClick={() => setMenuOpen(false)}
@@ -256,10 +256,10 @@ export default function CompanyNavbar() {
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                             </svg>
-                            +62 877-7844-0548
+                            +62 812-2110-7273
                         </a>
                         <a
-                            href="https://wa.me/6287778440548"
+                            href="https://wa.me/6281221107273"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-center gap-2 w-full py-3.5 text-sm font-bold uppercase tracking-wider"

@@ -430,7 +430,7 @@ export default function ClientsAndPartners() {
                                 </div>
                                 <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
                                     <a
-                                        href="https://wa.me/6287778440548"
+                                        href="https://wa.me/6281221107273"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-bold uppercase tracking-wider transition-all hover:opacity-90"

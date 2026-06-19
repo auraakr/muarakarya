@@ -42,7 +42,7 @@ export default function CompanyFooter() {
                         </div>
                         <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
                             <a
-                                href="https://wa.me/6287778440548"
+                                href="https://wa.me/6281221107273"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-bold uppercase tracking-wider transition-all hover:opacity-90"
@@ -54,14 +54,14 @@ export default function CompanyFooter() {
                                 Chat WhatsApp
                             </a>
                             <a
-                                href="tel:+6287778440548"
+                                href="tel:+6281221107273"
                                 className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-bold uppercase tracking-wider border transition-all hover:bg-white/10"
                                 style={{ borderColor: 'rgba(242,243,243,0.3)', color: '#f2f3f3' }}
                             >
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                                 </svg>
-                                +62 877-7844-0548
+                                +62 812-2110-7273
                             </a>
                         </div>
                     </div>
@@ -201,13 +201,13 @@ export default function CompanyFooter() {
                                 <div>
                                     <p className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: '#5e7d9a' }}>Telepon / WhatsApp</p>
                                     <a
-                                        href="tel:+6287778440548"
+                                        href="tel:+6281221107273"
                                         className="text-sm transition-colors"
                                         style={{ color: '#bec0c1' }}
                                         onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#135b97'; }}
                                         onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#bec0c1'; }}
                                     >
-                                        +62 877-7844-0548
+                                        +62 812-2110-7273
                                     </a>
                                 </div>
                             </li>
