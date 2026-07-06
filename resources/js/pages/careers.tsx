@@ -37,10 +37,57 @@ const deptStyle: Record<Exclude<Department, 'Semua'>, { bg: string; text: string
 
 const filters: Department[] = ['Semua', 'Engineering', 'Sales', 'Admin'];
 
+// ══════════════════════════════════════════
+// Data statistik hero (ditambah "description" untuk popup)
+// ══════════════════════════════════════════
+const statsData = [
+    {
+        icon: (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+        ),
+        label: 'Kantor Nyaman',
+        sub: 'Margahayu Raya, Bandung',
+        description: 'Kami menciptakan lingkungan kerja yang nyaman, baik di kantor maupun di lokasi proyek. Kantor menjadi ruang untuk berkoordinasi, berdiskusi, dan merencanakan pekerjaan, sedangkan di lapangan kami berkomitmen menyediakan lingkungan kerja yang aman, tertib, dan mendukung kelancaran setiap proyek.',
+    },
+    {
+        icon: (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+        ),
+        label: 'Karir Berkembang',
+        sub: 'Pelatihan rutin',
+        description: 'Kami percaya bahwa setiap proyek adalah kesempatan untuk belajar dan berkembang. Melalui beragam tantangan, kolaborasi tim, dan lingkungan kerja yang mendukung, setiap karyawan memiliki ruang untuk mengembangkan kompetensi serta membangun karier secara berkelanjutan.',
+    },
+    {
+        icon: (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+        ),
+        label: 'BPJS Lengkap',
+        sub: 'Kesehatan & TK',
+        description: 'Kami memberikan perlindungan bagi karyawan melalui kepesertaan BPJS Kesehatan dan BPJS Ketenagakerjaan sebagai bentuk komitmen perusahaan terhadap kesejahteraan dan keamanan kerja.',
+    },
+    {
+        icon: (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+        ),
+        label: 'Tim Profesional',
+        sub: 'Sejak 2014',
+        description: 'Kami didukung oleh tim yang berpengalaman dan kompeten di bidangnya. Dengan semangat kolaborasi dan profesionalisme, setiap anggota tim bekerja untuk memberikan hasil terbaik pada setiap proyek.',
+    },
+];
+
 export default function Careers({ jobs = [] }: { jobs: Job[] }) {
     const [activeFilter, setActiveFilter] = useState<Department>('Semua');
     const [expandedId, setExpandedId] = useState<number | null>(null);
     const [heroVisible, setHeroVisible] = useState(false);
+    const [selectedStat, setSelectedStat] = useState<number | null>(null); // ⬅️ TAMBAHAN: index stat yang dipilih
     const { ref: listRef, inView: listIn } = useInView(0.05);
     const { ref: ctaRef, inView: ctaIn } = useInView(0.1);
 
@@ -78,7 +125,7 @@ export default function Careers({ jobs = [] }: { jobs: Job[] }) {
                             style={{ backgroundColor: '#135b97', transform: 'translate(30%,-30%)' }} />
                         <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-10 blur-3xl"
                             style={{ backgroundColor: '#135b97', transform: 'translate(-30%,30%)' }} />
-                        
+
                         {/* Dot grid */}
                         <div className="absolute inset-0 opacity-[0.03]" style={{
                             backgroundImage: 'radial-gradient(circle, rgba(242,243,243,0.4) 1px, transparent 1px)',
@@ -129,7 +176,7 @@ export default function Careers({ jobs = [] }: { jobs: Job[] }) {
                             dalam industri HVAC & Refrigerasi. Bergabunglah dengan tim kami di Bandung.
                         </p>
 
-                        {/* Stats grid */}
+                        {/* Stats grid — sekarang setiap item bisa diklik untuk membuka penjelasan */}
                         <div
                             className="grid grid-cols-2 lg:grid-cols-4 gap-px transition-all duration-700 delay-300"
                             style={{
@@ -138,40 +185,20 @@ export default function Careers({ jobs = [] }: { jobs: Job[] }) {
                                 transform: heroVisible ? 'translateY(0)' : 'translateY(16px)',
                             }}
                         >
-                            {[
-                                { 
-                                    icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>, 
-                                    label: 'Kantor Nyaman', 
-                                    sub: 'Margahayu Raya, Bandung' 
-                                },
-                                { 
-                                    icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>, 
-                                    label: 'Karir Berkembang', 
-                                    sub: 'Pelatihan rutin' 
-                                },
-                                { 
-                                    icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>, 
-                                    label: 'BPJS Lengkap', 
-                                    sub: 'Kesehatan & TK' 
-                                },
-                                { 
-                                    icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>, 
-                                    label: 'Tim Profesional', 
-                                    sub: 'Sejak 2014' 
-                                },
-                            ].map((item) => (
-                                <div
+                            {statsData.map((item, i) => (
+                                <button
                                     key={item.label}
-                                    className="flex flex-col gap-1 p-5 transition-colors"
+                                    type="button"
+                                    onClick={() => setSelectedStat(i)}
+                                    className="flex flex-col gap-1 p-5 transition-colors text-left cursor-pointer"
                                     style={{ backgroundColor: 'rgba(8,8,8,0.8)' }}
-                                    onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.backgroundColor = 'rgba(19,91,151,0.2)'; }}
-                                    onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.backgroundColor = 'rgba(8,8,8,0.8)'; }}
+                                    onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'rgba(19,91,151,0.2)'; }}
+                                    onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'rgba(8,8,8,0.8)'; }}
                                 >
-                                    {/* Ganti emotikon dengan Ikon SVG berwarna biru */}
                                     <div className="mb-2 text-[#135b97]">{item.icon}</div>
                                     <span className="text-sm font-bold" style={{ color: '#f2f3f3' }}>{item.label}</span>
                                     <span className="text-xs" style={{ color: '#5e7d9a' }}>{item.sub}</span>
-                                </div>
+                                </button>
                             ))}
                         </div>
                     </div>
@@ -183,6 +210,52 @@ export default function Careers({ jobs = [] }: { jobs: Job[] }) {
                         </svg>
                     </div>
                 </section>
+
+                {/* ══════════════════════════════════════════
+                    MODAL PENJELASAN STAT (baru)
+                ══════════════════════════════════════════ */}
+                {selectedStat !== null && (
+                    <div
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+                        style={{ backgroundColor: 'rgba(8,8,8,0.7)' }}
+                        onClick={() => setSelectedStat(null)}
+                    >
+                        <div
+                            className="max-w-md w-full p-8 relative"
+                            style={{ backgroundColor: '#f2f3f3' }}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <button
+                                type="button"
+                                onClick={() => setSelectedStat(null)}
+                                aria-label="Tutup"
+                                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center transition-colors"
+                                style={{ color: '#5e7d9a' }}
+                            >
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+
+                            <div
+                                className="w-12 h-12 flex items-center justify-center mb-5"
+                                style={{ backgroundColor: 'rgba(19,91,151,0.1)', color: '#135b97' }}
+                            >
+                                {statsData[selectedStat].icon}
+                            </div>
+
+                            <h3 className="text-xl font-black mb-1" style={{ color: '#080808' }}>
+                                {statsData[selectedStat].label}
+                            </h3>
+                            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: '#135b97' }}>
+                                {statsData[selectedStat].sub}
+                            </p>
+                            <p className="text-sm leading-relaxed" style={{ color: '#5e7d9a' }}>
+                                {statsData[selectedStat].description}
+                            </p>
+                        </div>
+                    </div>
+                )}
 
                 {/* ══════════════════════════════════════════
                     JOB LISTINGS
