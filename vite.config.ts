@@ -24,7 +24,10 @@ export default defineConfig({
             },
         }),
         tailwindcss(),
-        wayfinder({
+        
+        // Matikan plugin wayfinder SAAT berada di server Vercel, 
+        // tapi tetap nyalakan saat kamu sedang ngoding lokal di laptop.
+        process.env.VERCEL ? null : wayfinder({
             formVariants: true,
         }),
     ],
