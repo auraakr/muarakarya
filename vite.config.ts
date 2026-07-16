@@ -28,4 +28,12 @@ export default defineConfig({
             formVariants: true,
         }),
     ],
+    // ════════════════════════════════════════════════════════════
+    // TAMBAHAN UNTUK MENGATASI ERROR VERCEL VITE BUILD
+    // ════════════════════════════════════════════════════════════
+    build: {
+        dynamicImportVarsOptions: {
+            exclude: ['path']
+        }
+    }
 });
