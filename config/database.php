@@ -86,17 +86,12 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '6543'), // Port 6543 khusus untuk pooler Supabase
+            'port' => env('DB_PORT', '6543'),
             'database' => env('DB_DATABASE', 'postgres'),
             'username' => env('DB_USERNAME'),
             'password' => env('DB_PASSWORD'),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'search_path' => 'public',
-            'sslmode' => 'require', // Ini sangat penting agar Render bisa ngobrol dengan Supabase
+            'sslmode' => 'require',
         ],
 
         'sqlsrv' => [
